@@ -13,6 +13,7 @@
 #'
 #' @references Li, J., 2016. Assessing spatial predictive models in the environmental sciences: accuracy.
 #' measures, data variation and variance explained. Environmental Modelling & Software 80 1-8.
+#'
 #' @author Jin Li
 #' @examples
 #' set.seed(1234)

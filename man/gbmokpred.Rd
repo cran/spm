@@ -92,7 +92,8 @@ default, 6 is used.}
 \item{...}{other arguments passed on to gbm.}
 }
 \value{
-A dataframe of longitude, latitude and predictions.
+A dataframe of longitude, latitude, predictions and variances. The
+variances are produced by OK based on the residuals of gbm.
 }
 \description{
 This function is to make spatial predictions using the hybrid

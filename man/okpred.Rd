@@ -42,7 +42,7 @@ By default, "Sph" is used.}
 \item{...}{other arguments passed on to gstat.}
 }
 \value{
-A dataframe of longitude, latitude and predictions.
+A dataframe of longitude, latitude, predictions and variances.
 }
 \description{
 This function is to make spatial predictions using ordinary

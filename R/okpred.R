@@ -25,7 +25,7 @@
 #' @param block block size. see krige in gstat for details.
 #' @param ... other arguments passed on to gstat.
 #'
-#' @return A dataframe of longitude, latitude and predictions.
+#' @return A dataframe of longitude, latitude, predictions and variances.
 #'
 #' @references Pebesma, E.J., 2004. Multivariable geostatistics in S: the gstat
 #' package. Computers & Geosciences, 30: 683-691.
@@ -59,11 +59,11 @@ okpred <- function (longlat, trainy, longlat2, nmax = 12, transformation =
   model.1 <- gstat::fit.variogram(vgm1, gstat::vgm(vgm.args, anis = anis))
   sp::coordinates(data.pred) = ~LON + LAT
   ok.pred1 <- gstat::krige(var1 ~ 1, data.dev, data.pred,
-    model = model.1, nmax = nmax, block = block)$var1.pred
-  if (transformation == "none") {ok.pred2 = ok.pred1}
-  if (transformation == "sqrt") {ok.pred2 = ok.pred1 ^ 2}
-  if (transformation == "arcsine") {ok.pred2 = (sin(ok.pred1)) ^ 2 * 100}
-  if (transformation == "log") {ok.pred2 = exp(ok.pred1)-delta}
-  ok.pred <- cbind(longlat2, ok.pred2)
+    model = model.1, nmax = nmax, block = block)
+  if (transformation == "none") {ok.pred2 = ok.pred1$var1.pred}
+  if (transformation == "sqrt") {ok.pred2 = ok.pred1$var1.pred ^ 2}
+  if (transformation == "arcsine") {ok.pred2 = (sin(ok.pred1$var1.pred)) ^ 2 * 100}
+  if (transformation == "log") {ok.pred2 = exp(ok.pred1$var1.pred)-delta}
+  ok.pred <- cbind(longlat2, ok.pred2, ok.pred1$var1.var)
   ok.pred
 }

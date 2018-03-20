@@ -86,14 +86,14 @@ This function is to make spatial predictions using generalized
 boosted regression modeling.
 }
 \note{
-this function is largely based on gbm
+This function is largely based on gbm.
 }
 \examples{
 \dontrun{
 data(sponge)
 data(sponge.grid)
 gbmpred1 <- gbmpred(sponge[, -c(3)], sponge[, 3], sponge.grid[, c(1:2)],
-sponge.grid, family = "poisson", n.cores=2, predacc = "ALL")
+sponge.grid, family = "poisson", n.cores=2)
 names(gbmpred1)
 }
 

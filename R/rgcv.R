@@ -1,6 +1,6 @@
-#' @title Cross validation, n-fold for random forest (RF)
+#' @title Cross validation, n-fold for random forest in ranger (RG)
 #'
-#' @description This function is a cross validation function for random forest.
+#' @description This function is a cross validation function for random forest in ranger.
 #'
 #' @param trainx a dataframe or matrix contains columns of predictor variables.
 #' @param trainy a vector of response, must have length equal to the number of
@@ -8,11 +8,12 @@
 #' @param cv.fold integer; number of folds in the cross-validation. if > 1,
 #' then apply n-fold cross validation; the default is 10, i.e., 10-fold cross
 #' validation that is recommended.
-#' @param mtry a function of number of remaining predictor variables to use as
-#' the mtry parameter in the randomForest call.
-#' @param ntree number of trees to grow. This should not be set to too small a
-#' number, to ensure that every input row gets predicted at least a few times.
-#' By default, 500 is used.
+#' @param mtry Number of variables to possibly split at in each node. Default is the
+#' (rounded down) square root of the number variables.
+#' @param num.trees number of trees. By default, 500 is used.
+#' @param min.node.size Default 1 for classification, 5 for regression.
+#' @param num.threads number of threads. Default is number of CPUs available.
+#' @param verbose Show computation status and estimated runtime.Default is FALSE.
 #' @param predacc can be either "VEcv" for vecv or "ALL" for all measures
 #' in function pred.acc.
 #' @param ... other arguments passed on to randomForest.
@@ -22,20 +23,16 @@
 #' for categorical data: correct classification rate (ccr), kappa (kappa), sensitivity (sens),
 #' specificity (spec) and true skill statistic (tss)
 #'
-#' @note This function is largely based on rf.cv (see Li et al. 2013) and
-#' rfcv in randomForest.
+#' @note This function is largely based on RFcv.
 #'
-#' @references Li, J., J. Siwabessy, M. Tran, Z. Huang, and A. Heap. 2013.
-#' Predicting Seabed Hardness Using Random Forest in R. Pages 299-329 in Y.
-#' Zhao and Y. Cen, editors. Data Mining Applications with R. Elsevier.
-#'
-#' Li, J. 2013. Predicting the spatial distribution of seabed gravel content
+#' @references Li, J. 2013. Predicting the spatial distribution of seabed gravel content
 #' using random forest, spatial interpolation methods and their hybrid methods.
 #' Pages 394-400  The International Congress on Modelling and Simulation
 #' (MODSIM) 2013, Adelaide.
 #'
-#' Liaw, A. and M. Wiener (2002). Classification and Regression by
-#' randomForest. R News 2(3), 18-22.
+#' Wright, M. N. & Ziegler, A. (2017). ranger: A Fast Implementation
+#' of Random Forests for High Dimensional Data in C++ and R. J Stat Softw 77:1-17.
+#' http://dx.doi.org/10.18637/jss.v077.i01.
 #'
 #' @author Jin Li
 #' @examples
@@ -43,14 +40,14 @@
 #' data(hard)
 #' data(petrel)
 #'
-#' rfcv1 <- RFcv(petrel[, c(1,2, 6:9)], petrel[, 5], predacc = "ALL")
-#' rfcv1
+#' rgcv1 <- rgcv(petrel[, c(1,2, 6:9)], petrel[, 5], predacc = "ALL")
+#' rgcv1
 #'
 #' n <- 20 # number of iterations, 60 to 100 is recommended.
 #' VEcv <- NULL
 #' for (i in 1:n) {
-#' rfcv1 <- RFcv(petrel[, c(1,2,6:9)], petrel[, 5], predacc = "VEcv")
-#' VEcv [i] <- rfcv1
+#' rgcv1 <- rgcv(petrel[, c(1,2,6:9)], petrel[, 5], predacc = "VEcv")
+#' VEcv [i] <- rgcv1
 #' }
 #' plot(VEcv ~ c(1:n), xlab = "Iteration for RF", ylab = "VEcv (%)")
 #' points(cumsum(VEcv) / c(1:n) ~ c(1:n), col = 2)
@@ -59,8 +56,8 @@
 #' n <- 20 # number of iterations, 60 to 100 is recommended.
 #' measures <- NULL
 #' for (i in 1:n) {
-#' rfcv1 <- RFcv(hard[, c(4:6)], hard[, 17])
-#' measures <- rbind(measures, rfcv1$ccr) # for kappa, replace ccr.cv with kappa.cv
+#' rgcv1 <- rgcv(hard[, c(4:6)], hard[, 17])
+#' measures <- rbind(measures, rgcv1$ccr) # for kappa, replace ccr.cv with kappa.cv
 #' }
 #' plot(measures ~ c(1:n), xlab = "Iteration for RF", ylab = "Correct
 #' classification rate  (%)")
@@ -69,9 +66,10 @@
 #' }
 #'
 #' @export
-RFcv <- function (trainx, trainy, cv.fold = 10, mtry = if (!is.null(trainy) &&
-  !is.factor(trainy)) max(floor(ncol(trainx) / 3), 1) else
-  floor(sqrt(ncol(trainx))), ntree = 500, predacc = "ALL", ...) {
+rgcv <- function (trainx, trainy, cv.fold = 10, mtry = if (!is.null(trainy) &&
+  !is.factor(trainy)) max(floor(ncol(trainx) / 3), 1) else floor(sqrt(ncol(trainx))),
+  num.trees = 500, min.node.size = NULL, num.threads = NULL, verbose = FALSE,
+  predacc = "ALL", ...) {
   classRF <- is.factor(trainy)
   n <- nrow(trainx)
   if (classRF) {
@@ -86,10 +84,13 @@ RFcv <- function (trainx, trainy, cv.fold = 10, mtry = if (!is.null(trainy) &&
   }
   cv.pred <- NULL
   for (i in 1:cv.fold) {
-    all.rf <- randomForest::randomForest(trainx[idx != i, , drop = FALSE],
-      trainy[idx != i], trainx[idx == i, , drop = FALSE],
-      trainy[idx == i], mtry = mtry, ntree=ntree)
-    cv.pred[idx == i] <- all.rf$test$predicted
+    data.dev <- trainx[idx != i, , drop = FALSE]
+    data.pred <- trainx[idx == i, , drop = FALSE]
+    data.dev$var1 <- trainy[idx != i]
+    all.rf <- ranger::ranger(var1 ~ ., data = data.dev, mtry = mtry, num.trees = num.trees,
+                             min.node.size = min.node.size, num.threads = num.threads,
+                             verbose = verbose)
+    cv.pred[idx == i] <- stats::predict(all.rf, data = data.pred)$predictions
   }
   predictive.accuracy <- NULL
   if (predacc == "VEcv") {predictive.accuracy = vecv(trainy, cv.pred)} else (

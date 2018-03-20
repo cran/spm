@@ -52,11 +52,11 @@
 #' @param ... other arguments passed on to gbm.
 #'
 #' @return A list with the following components:
-#' for numerical data: me, rme, mae, rmae, mse, rmse, rrmse and vecv; or vecv
+#' for numerical data: me, rme, mae, rmae, mse, rmse, rrmse, vecv and e1; or vecv
 #' for categorical data: correct classification rate (ccr.cv) and kappa (kappa.cv)
 #'
-#' @note this function is largely based on rf.cv (see Li et al. 2013),
-#' rfcv in randomForest and gbm
+#' @note This function is largely based on rf.cv (see Li et al. 2013),
+#' rfcv in randomForest and gbm.
 #'
 #' @references Li, J., J. Siwabessy, M. Tran, Z. Huang, and A. Heap. 2013.
 #' Predicting Seabed Hardness Using Random Forest in R. Pages 299-329 in Y.

@@ -1,22 +1,22 @@
 Package: spm
 Title: Spatial Predictive Modeling
-Version: 1.0.0
-Date: 2017-08-22
+Version: 1.1.0
+Date: 2018-03-20
 Authors@R: person("Jin", "Li", email = "jin.li@ga.gov.au", role = c("aut", "cre"))
 Description: Introduction to some novel accurate hybrid methods of geostatistical and machine learning methods for spatial predictive modelling. It contains two commonly used geostatistical methods, two machine learning methods, four hybrid methods and two averaging methods. For each method, two functions are provided. One function is for assessing the predictive errors and accuracy of the method based on cross-validation. The other one is for generating spatial predictions using the method. For details please see: Li, J., Potter, A., Huang, Z., Daniell, J. J. and Heap, A. (2010) <https:www.ga.gov.au/metadata-gateway/metadata/record/gcat_71407>
   Li, J., Heap, A. D., Potter, A., Huang, Z. and Daniell, J. (2011) <doi:10.1016/j.csr.2011.05.015>
   Li, J., Heap, A. D., Potter, A. and Daniell, J. (2011) <doi:10.1016/j.envsoft.2011.07.004>
   Li, J., Potter, A., Huang, Z. and Heap, A. (2012) <https:www.ga.gov.au/metadata-gateway/metadata/record/74030>.
 Depends: R (>= 2.10)
-Imports: gstat, sp, randomForest, psy, gbm, stats
+Imports: gstat, sp, randomForest, psy, gbm, biomod2, stats, ranger
 License: GPL (>= 2)
 LazyData: true
 RoxygenNote: 6.0.1
 Suggests: knitr, rmarkdown
 VignetteBuilder: knitr
 NeedsCompilation: no
-Packaged: 2017-08-25 01:42:07 UTC; u09672
+Packaged: 2018-03-19 23:18:53 UTC; u09672
 Author: Jin Li [aut, cre]
 Maintainer: Jin Li <jin.li@ga.gov.au>
 Repository: CRAN
-Date/Publication: 2017-08-25 11:57:29 UTC
+Date/Publication: 2018-03-20 07:36:21 UTC

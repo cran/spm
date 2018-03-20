@@ -88,7 +88,7 @@ default, 6 is used.}
 }
 \value{
 A list with the following components:
-for numerical data: me, rme, mae, rmae, mse, rmse, rrmse and vecv; or vecv
+for numerical data: me, rme, mae, rmae, mse, rmse, rrmse, vecv and e1; or vecv
 for categorical data: correct classification rate (ccr.cv) and kappa (kappa.cv)
 }
 \description{

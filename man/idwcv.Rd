@@ -32,7 +32,7 @@ in function pred.acc.}
 }
 \value{
 A list with the following components:
- me, rme, mae, rmae, mse, rmse, rrmse and vecv; or vecv only.
+ me, rme, mae, rmae, mse, rmse, rrmse, vecv and e1; or vecv only.
 }
 \description{
 This function is a cross validation function for inverse

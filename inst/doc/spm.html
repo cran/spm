@@ -12,7 +12,7 @@
 
 <meta name="author" content="Jin Li (jin.li@ga.gov.au)" />
 
-<meta name="date" content="2017-08-25" />
+<meta name="date" content="2018-03-20" />
 
 <title>A Brief Introduction to the spm Package</title>
 
@@ -70,23 +70,24 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <h1 class="title toc-ignore">A Brief Introduction to the spm Package</h1>
 <h4 class="author"><em>Jin Li (<a href="mailto:jin.li@ga.gov.au">jin.li@ga.gov.au</a>)</em></h4>
-<h4 class="date"><em>2017-08-25</em></h4>
+<h4 class="date"><em>2018-03-20</em></h4>
 
 
 
 <div id="introduction" class="section level2">
 <h2>1 Introduction</h2>
 <p>The package ‘spm’ is short for ‘spatial predictive modelling, spatial predictive model(s), or spatial predictive method(s)’. It aims to introduce some novel, accurate, hybrid geostatistical and machine learning methods for spatial predictive modelling. It contains functions for a few geostatistical and machine learning methods as well as their hybrid methods. Further methods will be included in the future according to their predictive accuracy and new developments in spatial predictive modelling field.</p>
-<p>For each method, two functions are provided. They all use data.frame as input data. These functions attempt to simplify and streamline the model evaluation and model application processes, which may assist users to apply these methods to their data to improve modelling efficiency as well as predictive accuracy.</p>
+<p>For each method, two functions are provided. They all use data.frame as input data. Moreover, two functions are provided for accuracy assessment, and a further function is for converting error measures (e.g., rmse) to accuracy measure (i.e., vecv). These functions attempt to simplify and streamline the model evaluation and model application processes, which may assist users to apply these methods to their data to improve modelling efficiency as well as predictive accuracy.</p>
 </div>
 <div id="spatial-predictive-methods" class="section level2">
 <h2>2 Spatial predictive methods</h2>
 <p>The methods currently included in the package are:</p>
 <ul>
 <li>two commonly used geostatistical methods: inverse distance weighting (idw) and ordinary kriging (ok);</li>
-<li>two highly accurate machine learning methods: random forest (rf) and general boosting model (gbm);</li>
-<li>four hybrid methods: rfidw, rfok, gbmidw and gbmok; and</li>
-<li>two averaging methods: the average of rfidw and rfok (rfidwrfok), and the average of gbmidw and gbmok (gbmidwgbmok)</li>
+<li>two highly accurate machine learning methods: random forest (rf) in library(randomForest) and general boosting model (gbm) in library(gbm);</li>
+<li>four hybrid methods: rfidw, rfok, gbmidw and gbmok;</li>
+<li>two averaging methods: the average of rfidw and rfok (rfokrfidw), and the average of gbmidw and gbmok (gbmokgbmidw); and</li>
+<li>For random forest method, all relevant methods above are also implemented using ranger (rg) in library(ranger), which lead to four methods: rg, rgidw, rgok and rgokrgidw. These methods are fast version of their corersponding rf methods.</li>
 </ul>
 </div>
 <div id="functions" class="section level2">
@@ -100,13 +101,17 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li>idwcv,</li>
 <li>okcv,</li>
 <li>rfcv,</li>
+<li>rgcv</li>
 <li>gbmcv,</li>
 <li>rfidwcv,</li>
 <li>rfokcv,</li>
+<li>rgidwcv,</li>
+<li>rgokcv,</li>
 <li>gbmidwcv,</li>
 <li>gbmokcv,</li>
-<li>rfidwrfokcv and</li>
-<li>gbmidwgbmokcv.</li>
+<li>rfokrfidwcv,</li>
+<li>rgokrgidwcv, and</li>
+<li>gbmokgbmidwcv.</li>
 </ul>
 <p>The procedure for these functions can be summarised in Table 1.</p>
 <div id="table-1-a-procedure-for-predictive-accuracy-assessment" class="section level5">
@@ -158,8 +163,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </div>
 <div id="accuracy-and-error-measures" class="section level4">
 <h4>3.1.2 Accuracy and error measures</h4>
-<p>A unit, scale and data-variance independent accuracy measure, the vecv (i.e., variance explained by predictive models based on cross-validation) is implemented in function vecv.</p>
-<p>A few other error measures are also available in function pred.acc, including mean error (me), mean absolute error (mae), mean squared error (mse), relative me (rme), relative mae (rmae), root mse (rmse), relative rmse (rrmse), as well as the accuracy measure, vecv.</p>
+<p>A unit, scale and data-variance independent accuracy measure, the vecv (i.e., variance explained by predictive models based on cross-validation) is implemented in function vecv for numerical data.</p>
+<p>A few other error and accuracy measures are also available in function pred.acc for numerical data, including mean error (me), mean absolute error (mae), mean squared error (mse), relative me (rme), relative mae (rmae), root mse (rmse), relative rmse (rrmse), as well as the accuracy measure, vecv and Legates and McCabe’s E1 (e1).</p>
+<p>pred.acc can also be sued to calculate correct classification rate (ccr), kappa (kappa), sensitivity (sens), specificity (spec) and true skill statistic (tss) for categorical data with the observed (obs) data specified as factor.</p>
+<p>They are based on the differences between the predicted values for and the observed values of validation samples for cross-validation. For 0 and 1 data, the observed values need to be specified as factor in order to use accuracy measures for categorical data. Moreover, sens, spec, tss and rmse are for categorical data with two levels (e.g. presence and absence data).</p>
+</div>
+<div id="convering-error-measures-to-vecv" class="section level4">
+<h4>3.1.3 Convering error measures to vecv</h4>
+<p>A function, tovecv, is developed to convert existing predictive error measures to vecv. For the definition of vecv, please see function vecv in library (spm). The error measures considered are mean square error (mse), root mse (rmse), relative rmse (rrmse), standardised rmse (srmse) and mean square reduced error (msre).</p>
 </div>
 </div>
 <div id="generate-spatial-predictions" class="section level3">
@@ -169,13 +180,17 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li>idwpred,</li>
 <li>okpred,</li>
 <li>rfpred,</li>
+<li>rgpred,</li>
 <li>gbmpred,</li>
 <li>rfidwpred,</li>
 <li>rfokpred,</li>
+<li>rgidwpred,</li>
+<li>rgokpred,</li>
 <li>gbmidwpred,</li>
 <li>gbmokpred,</li>
-<li>rfidwrfokpred and</li>
-<li>gbmidwgbmokpred.</li>
+<li>rfokrfidwpred,</li>
+<li>rgokrgidwpred and</li>
+<li>gbmokgbmidwpred.</li>
 </ul>
 <p>With certain parameters specified for a method, the cross-validation function (e.g., rfokcv) produces information on the predictive accuracy of the method, and the prediction function (e.g., rfokpred) produces spatial predictions. By using the same random seed, the predictive accuracy values produced for these methods are directly comparable.</p>
 </div>
@@ -183,27 +198,27 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="applications-of-these-functions" class="section level2">
 <h2>4 Applications of these functions</h2>
 <p>Install spm using:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">&gt;<span class="st"> </span><span class="kw">install.packages</span>(<span class="st">&quot;spm&quot;</span>, <span class="dt">dependencies =</span> <span class="kw">c</span>(<span class="st">&quot;Imports&quot;</span>, <span class="st">&quot;Suggests&quot;</span>))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">&quot;spm&quot;</span>, <span class="dt">dependencies =</span> <span class="kw">c</span>(<span class="st">&quot;Imports&quot;</span>, <span class="st">&quot;Suggests&quot;</span>))</code></pre></div>
 <div id="examples-for-idwcv-and-rfokcv" class="section level3">
 <h3>4.1 Examples for idwcv and rfokcv</h3>
 <div id="idwcv" class="section level4">
 <h4>4.1.1 idwcv</h4>
 <p>The function idwcv is applied to seabed gravel content samples in the Petrel region to test the predictive accuracy of inverse distance squared, a commonly used spatial interpolation method.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">&gt;<span class="st"> </span><span class="kw">library</span>(spm)
-&gt;<span class="st"> </span><span class="kw">data</span>(petrel)
-&gt;<span class="st"> </span><span class="kw">set.seed</span>(<span class="dv">1234</span>)
-&gt;<span class="st"> </span>idwcv1 &lt;-<span class="st"> </span><span class="kw">idwcv</span>(petrel[, <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)], petrel[, <span class="dv">5</span>], <span class="dt">nmax =</span> <span class="dv">12</span>, <span class="dt">idp =</span> <span class="dv">2</span>, <span class="dt">predacc =</span> <span class="st">&quot;VEcv&quot;</span>)
-&gt;<span class="st"> </span>idwcv1
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(spm)
+<span class="kw">data</span>(petrel)
+<span class="kw">set.seed</span>(<span class="dv">1234</span>)
+idwcv1 &lt;-<span class="st"> </span><span class="kw">idwcv</span>(petrel[, <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)], petrel[, <span class="dv">5</span>], <span class="dt">nmax =</span> <span class="dv">12</span>, <span class="dt">idp =</span> <span class="dv">2</span>, <span class="dt">predacc =</span> <span class="st">&quot;VEcv&quot;</span>)
+idwcv1
 [<span class="dv">1</span>] <span class="fl">23.11333</span></code></pre></div>
 </div>
 <div id="rfokcv" class="section level4">
 <h4>4.1.2 rfokcv</h4>
 <p>The function rfokcv is applied to seabed gravel content samples in the Petrel region to test the predictive accuracy of RFOK.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">&gt;<span class="st"> </span><span class="kw">library</span>(spm)
-&gt;<span class="st"> </span><span class="kw">data</span>(petrel)
-&gt;<span class="st"> </span><span class="kw">set.seed</span>(<span class="dv">1234</span>) 
-&gt;<span class="st"> </span>rfokcv1 &lt;-<span class="st"> </span><span class="kw">rfokcv</span>(petrel[, <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)], petrel[, <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>, <span class="dv">6</span>:<span class="dv">9</span>)], petrel[, <span class="dv">5</span>], <span class="dt">predacc =</span> <span class="st">&quot;VEcv&quot;</span>)
-&gt;<span class="st"> </span>rfokcv1
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(spm)
+<span class="kw">data</span>(petrel)
+<span class="kw">set.seed</span>(<span class="dv">1234</span>) 
+rfokcv1 &lt;-<span class="st"> </span><span class="kw">rfokcv</span>(petrel[, <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)], petrel[, <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>, <span class="dv">6</span><span class="op">:</span><span class="dv">9</span>)], petrel[, <span class="dv">5</span>], <span class="dt">predacc =</span> <span class="st">&quot;VEcv&quot;</span>)
+rfokcv1
 [<span class="dv">1</span>] <span class="fl">39.88995</span></code></pre></div>
 <p>This accuracy is comparable with that of idw above as their random seeds were the same, i.e., the same datasets were generated and used in the cross validation.</p>
 </div>
@@ -213,33 +228,33 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="select-optimal-parameters-and-predictors-1" class="section level4">
 <h4>4.2.1 Select optimal parameters and predictors</h4>
 <p>The cross-validation functions above enable users to find optimal parameters and/or predictors for these methods (e.g., nmax and idp for idw). Taking idw as an example as below.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">&gt;<span class="st"> </span><span class="kw">data</span>(petrel)
-&gt;<span class="st"> </span>idp &lt;-<span class="st"> </span><span class="kw">c</span>((<span class="dv">1</span>:<span class="dv">10</span>)*<span class="fl">0.2</span>)
-&gt;<span class="st"> </span>nmax &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">10</span>:<span class="dv">20</span>)
-&gt;<span class="st"> </span>idwopt &lt;-<span class="st"> </span><span class="kw">array</span>(<span class="dv">0</span>,<span class="dt">dim=</span><span class="kw">c</span>(<span class="kw">length</span>(idp),<span class="kw">length</span>(nmax)))
-&gt;<span class="st"> </span>for (i in <span class="dv">1</span>:<span class="kw">length</span>(idp)) {
-&gt;<span class="st"> </span>for (j in <span class="dv">1</span>:<span class="kw">length</span>(nmax))  {
-&gt;<span class="st"> </span><span class="kw">set.seed</span>(<span class="dv">1234</span>)
-&gt;<span class="st"> </span>idwcv2<span class="fl">.3</span> &lt;-<span class="st"> </span><span class="kw">idwcv</span>(petrel[, <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)], petrel[, <span class="dv">5</span>], <span class="dt">nmax =</span> nmax[j], <span class="dt">idp =</span> idp[i], <span class="dt">predacc =</span> <span class="st">&quot;VEcv&quot;</span> )
-&gt;<span class="st"> </span>idwopt[i, j] &lt;-<span class="st"> </span>idwcv2<span class="fl">.3</span>
-&gt;<span class="st">  </span>}
-&gt;<span class="st"> </span>} 
-&gt;<span class="st"> </span><span class="kw">which</span> (idwopt ==<span class="st"> </span><span class="kw">max</span>(idwopt), <span class="dt">arr.ind =</span> T )
-&gt;<span class="st">      </span>row col
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(petrel)
+idp &lt;-<span class="st"> </span><span class="kw">c</span>((<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>)<span class="op">*</span><span class="fl">0.2</span>)
+nmax &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">10</span><span class="op">:</span><span class="dv">20</span>)
+idwopt &lt;-<span class="st"> </span><span class="kw">array</span>(<span class="dv">0</span>,<span class="dt">dim=</span><span class="kw">c</span>(<span class="kw">length</span>(idp),<span class="kw">length</span>(nmax)))
+<span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(idp)) {
+<span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(nmax))  {
+<span class="kw">set.seed</span>(<span class="dv">1234</span>)
+idwcv2.<span class="dv">3</span> &lt;-<span class="st"> </span><span class="kw">idwcv</span>(petrel[, <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)], petrel[, <span class="dv">5</span>], <span class="dt">nmax =</span> nmax[j], <span class="dt">idp =</span> idp[i], <span class="dt">predacc =</span> <span class="st">&quot;VEcv&quot;</span> )
+idwopt[i, j] &lt;-<span class="st"> </span>idwcv2.<span class="dv">3</span>
+  }
+} 
+<span class="kw">which</span> (idwopt <span class="op">==</span><span class="st"> </span><span class="kw">max</span>(idwopt), <span class="dt">arr.ind =</span> T )
+<span class="op">&gt;</span><span class="st">      </span>row col
 [<span class="dv">1</span>,]   <span class="dv">3</span>   <span class="dv">3</span>
-&gt;<span class="st"> </span>idp[<span class="dv">3</span>]
-&gt;<span class="st"> </span>[<span class="dv">1</span>] <span class="fl">0.6</span>
-&gt;<span class="st"> </span>nmax[<span class="dv">3</span>]
-&gt;<span class="st"> </span>[<span class="dv">1</span>] <span class="dv">12</span></code></pre></div>
+idp[<span class="dv">3</span>]
+<span class="op">&gt;</span><span class="st"> </span>[<span class="dv">1</span>] <span class="fl">0.6</span>
+nmax[<span class="dv">3</span>]
+<span class="op">&gt;</span><span class="st"> </span>[<span class="dv">1</span>] <span class="dv">12</span></code></pre></div>
 </div>
 <div id="predictive-accuracy-of-optimised-model" class="section level4">
 <h4>4.2.2 Predictive accuracy of optimised model</h4>
 <p>Predictive accuracy of optimised idw</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">&gt;<span class="st"> </span><span class="kw">library</span>(spm)
-&gt;<span class="st"> </span><span class="kw">data</span>(petrel)
-&gt;<span class="st"> </span><span class="kw">set.seed</span>(<span class="dv">1234</span>)
-&gt;<span class="st"> </span>idwcv1 &lt;-<span class="st"> </span><span class="kw">idwcv</span>(petrel[, <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)], petrel[, <span class="dv">5</span>], <span class="dt">nmax =</span> <span class="dv">12</span>, <span class="dt">idp =</span> <span class="fl">0.6</span>, <span class="dt">predacc =</span> <span class="st">&quot;VEcv&quot;</span>)
-&gt;<span class="st"> </span>idwcv1
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(spm)
+<span class="kw">data</span>(petrel)
+<span class="kw">set.seed</span>(<span class="dv">1234</span>)
+idwcv1 &lt;-<span class="st"> </span><span class="kw">idwcv</span>(petrel[, <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)], petrel[, <span class="dv">5</span>], <span class="dt">nmax =</span> <span class="dv">12</span>, <span class="dt">idp =</span> <span class="fl">0.6</span>, <span class="dt">predacc =</span> <span class="st">&quot;VEcv&quot;</span>)
+idwcv1
 [<span class="dv">1</span>] <span class="fl">35.93557</span></code></pre></div>
 <p>As usual, such parameter and variable selection is time consuming if the range of relevant parameter and/or number of predictors are large, especially for gbm and gbm related methods. For the machine learning methods, it is recommended to use the existing variable selection methods to do preliminary selection and then use above procedure to do further selection if needed.</p>
 <p>These selections may produce the most accurate predictive models, but the resultant predictions may not look real (i.e. containing artefacts) that may not satisfy the need of some clients. So the artefacts may need to be minimised by sacrificing a small amount of the accuracy to meet client’s expectation.</p>
@@ -248,13 +263,13 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="stabilise-the-predictive-accuracy-produced-by-cross-validation-functions" class="section level3">
 <h3>4.3 Stabilise the predictive accuracy produced by cross validation functions</h3>
 <p>Again taking idwcv as an example, the accuracy produced above changes with each run of idwcv, i.e., with random seed. To stabilise the accuracy, we repeatedly run idwcv many times to produce an averaged predictive accuracy.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">&gt;<span class="st"> </span>n &lt;-<span class="st"> </span><span class="dv">100</span> <span class="co"># number of iterations, 60 to 100 is recommended.</span>
-&gt;<span class="st"> </span>measures &lt;-<span class="st"> </span><span class="ot">NULL</span>
-&gt;<span class="st"> </span>for (i in <span class="dv">1</span>:n) { 
-+<span class="st"> </span>idwcv1 &lt;-<span class="st"> </span><span class="kw">idwcv</span>(petrel [, <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)], petrel [, <span class="dv">5</span>], <span class="dt">nmax =</span> <span class="dv">12</span>, <span class="dt">idp =</span> <span class="fl">0.6</span>, <span class="dt">predacc =</span> <span class="st">&quot;ALL&quot;</span>)
-+<span class="st"> </span>measures &lt;-<span class="st"> </span><span class="kw">rbind</span>(measures, idwcv1$vecv)
-+<span class="st"> </span>}
-&gt;<span class="st"> </span><span class="kw">mean</span>(measures)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">n &lt;-<span class="st"> </span><span class="dv">100</span> <span class="co"># number of iterations, 60 to 100 is recommended.</span>
+measures &lt;-<span class="st"> </span><span class="ot">NULL</span>
+<span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>n) { 
+ idwcv1 &lt;-<span class="st"> </span><span class="kw">idwcv</span>(petrel [, <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)], petrel [, <span class="dv">5</span>], <span class="dt">nmax =</span> <span class="dv">12</span>, <span class="dt">idp =</span> <span class="fl">0.6</span>, <span class="dt">predacc =</span> <span class="st">&quot;ALL&quot;</span>)
+ measures &lt;-<span class="st"> </span><span class="kw">rbind</span>(measures, idwcv1<span class="op">$</span>vecv)
+ }
+<span class="kw">mean</span>(measures)
 [<span class="dv">1</span>] <span class="fl">33.69691</span></code></pre></div>
 <p>This procedure can be applied to all other cross validation functions in spm to produced stablised predictive accuracy of relevant methods.</p>
 </div>
@@ -263,49 +278,43 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="idwpred" class="section level5">
 <h5>4.4.1 idwpred</h5>
 <p>Seabed gravel content samples in the Petrel region, northern Australia marine margin are used to make spatial predictions using idw by running idwpred.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">&gt;<span class="st"> </span><span class="kw">library</span>(spm)
-&gt;<span class="st"> </span><span class="kw">data</span>(petrel)
-&gt;<span class="st"> </span><span class="kw">data</span>(petrel.grid)
-&gt;<span class="st"> </span>idwpred1 &lt;-<span class="st"> </span><span class="kw">idwpred</span>(petrel[, <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)], petrel[, <span class="dv">5</span>], petrel.grid, <span class="dt">nmax =</span> <span class="dv">12</span>, <span class="dt">idp =</span> <span class="fl">0.6</span>)
-&gt;<span class="st"> </span><span class="kw">names</span>(idwpred1)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(spm)
+<span class="kw">data</span>(petrel)
+<span class="kw">data</span>(petrel.grid)
+idwpred1 &lt;-<span class="st"> </span><span class="kw">idwpred</span>(petrel[, <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)], petrel[, <span class="dv">5</span>], petrel.grid, <span class="dt">nmax =</span> <span class="dv">12</span>, <span class="dt">idp =</span> <span class="fl">0.6</span>)
+<span class="kw">names</span>(idwpred1)
 [<span class="dv">1</span>] <span class="st">&quot;LON&quot;</span>       <span class="st">&quot;LAT&quot;</span>       <span class="st">&quot;var1.pred&quot;</span> <span class="st">&quot;var1.var&quot;</span> 
-&gt;<span class="st"> </span>idwpred1 &lt;-<span class="st"> </span>(idwpred1)[, -<span class="dv">4</span>] <span class="co"># remove the 4th column as it contains no information.</span>
-&gt;<span class="st"> </span><span class="kw">class</span>(idwpred1)
+idwpred1 &lt;-<span class="st"> </span>(idwpred1)[, <span class="op">-</span><span class="dv">4</span>] <span class="co"># remove the 4th column as it contains no information.</span>
+<span class="kw">class</span>(idwpred1)
 [<span class="dv">1</span>] <span class="st">&quot;data.frame&quot;</span>
-&gt;<span class="st"> </span><span class="kw">names</span>(idwpred1) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;longitude&quot;</span>, <span class="st">&quot;latitude&quot;</span>, <span class="st">&quot;gravel&quot;</span>)
-&gt;<span class="st"> </span><span class="kw">head</span>(idwpred1)
+<span class="kw">names</span>(idwpred1) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;longitude&quot;</span>, <span class="st">&quot;latitude&quot;</span>, <span class="st">&quot;gravel&quot;</span>)
+<span class="kw">head</span>(idwpred1)
         longitude latitude  gravel
-<span class="dv">470277</span>  <span class="fl">128.8022</span>  -<span class="fl">10.60239</span> <span class="fl">22.00789</span>
-<span class="dv">470278</span>  <span class="fl">128.8047</span>  -<span class="fl">10.60239</span> <span class="fl">22.00805</span>
-<span class="dv">470279</span>  <span class="fl">128.8072</span>  -<span class="fl">10.60239</span> <span class="fl">22.00822</span>
-<span class="dv">470280</span>  <span class="fl">128.8097</span>  -<span class="fl">10.60239</span> <span class="fl">22.00838</span>
-<span class="dv">470281</span>  <span class="fl">128.8122</span>  -<span class="fl">10.60239</span> <span class="fl">22.00855</span>
-<span class="dv">470282</span>  <span class="fl">128.8147</span>  -<span class="fl">10.60239</span> <span class="fl">22.00873</span></code></pre></div>
+<span class="dv">470277</span>  <span class="fl">128.8022</span>  <span class="op">-</span><span class="fl">10.60239</span> <span class="fl">22.00789</span>
+<span class="dv">470278</span>  <span class="fl">128.8047</span>  <span class="op">-</span><span class="fl">10.60239</span> <span class="fl">22.00805</span>
+<span class="dv">470279</span>  <span class="fl">128.8072</span>  <span class="op">-</span><span class="fl">10.60239</span> <span class="fl">22.00822</span>
+<span class="dv">470280</span>  <span class="fl">128.8097</span>  <span class="op">-</span><span class="fl">10.60239</span> <span class="fl">22.00838</span>
+<span class="dv">470281</span>  <span class="fl">128.8122</span>  <span class="op">-</span><span class="fl">10.60239</span> <span class="fl">22.00855</span>
+<span class="dv">470282</span>  <span class="fl">128.8147</span>  <span class="op">-</span><span class="fl">10.60239</span> <span class="fl">22.00873</span></code></pre></div>
 <p>Since grid file (e.g. petrel.grid) can be in WGS84 or UTM, the location info of the grid file were renamed to “LON” and “LAT”, and the variable to be predicted may vary with studies so was named to “var1”, in the prediction function. Users need to rename the prediction file as shown above.</p>
 </div>
 <div id="rfokpred" class="section level4">
 <h4>4.4.2 rfokpred</h4>
 <p>Seabed gravel content samples in the Petrel sub-basin, northern Australia marine margin are used to make spatial predictions using rfok by running rfokpred.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">&gt;<span class="st"> </span><span class="kw">set.seed</span>(<span class="dv">1234</span>)
-&gt;<span class="st"> </span><span class="kw">library</span>(spm)
-&gt;<span class="st"> </span><span class="kw">data</span>(petrel)
-&gt;<span class="st"> </span><span class="kw">data</span>(petrel.grid)
-&gt;<span class="st"> </span><span class="kw">data</span>(petrel)
-&gt;<span class="st"> </span><span class="kw">data</span>(petrel.grid)
-&gt;<span class="st"> </span>rfokpred1 &lt;-<span class="st"> </span><span class="kw">rfokpred</span>(petrel[, <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)], petrel[, <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>, <span class="dv">6</span>:<span class="dv">9</span>)], petrel[, <span class="dv">5</span>], 
-+<span class="st"> </span>petrel.grid[, <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)], petrel.grid, <span class="dt">ntree =</span> <span class="dv">500</span>, <span class="dt">nmax =</span> <span class="dv">11</span>, <span class="dt">vgm.args =</span> (<span class="st">&quot;Log&quot;</span>))
-&gt;<span class="st"> </span><span class="kw">class</span>(rfokpred1)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">1234</span>)
+<span class="kw">library</span>(spm)
+<span class="kw">data</span>(petrel)
+<span class="kw">data</span>(petrel.grid)
+<span class="kw">data</span>(petrel)
+<span class="kw">data</span>(petrel.grid)
+rfokpred1 &lt;-<span class="st"> </span><span class="kw">rfokpred</span>(petrel[, <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)], petrel[, <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>, <span class="dv">6</span><span class="op">:</span><span class="dv">9</span>)], petrel[, <span class="dv">5</span>], 
+ petrel.grid[, <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)], petrel.grid, <span class="dt">ntree =</span> <span class="dv">500</span>, <span class="dt">nmax =</span> <span class="dv">11</span>, <span class="dt">vgm.args =</span> (<span class="st">&quot;Log&quot;</span>))
+<span class="kw">class</span>(rfokpred1)
 [<span class="dv">1</span>] <span class="st">&quot;data.frame&quot;</span>
-&gt;<span class="st"> </span><span class="kw">names</span>(rfokpred1) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;longitude&quot;</span>, <span class="st">&quot;latitude&quot;</span>, <span class="st">&quot;gravel&quot;</span>)
-&gt;<span class="st"> </span><span class="kw">head</span>(rfokpred1)
-        longitude latitude  gravel
-<span class="dv">470277</span>  <span class="fl">128.8022</span>  -<span class="fl">10.60239</span> <span class="fl">19.28021</span>
-<span class="dv">470278</span>  <span class="fl">128.8047</span>  -<span class="fl">10.60239</span> <span class="fl">17.40339</span>
-<span class="dv">470279</span>  <span class="fl">128.8072</span>  -<span class="fl">10.60239</span> <span class="fl">17.40313</span>
-<span class="dv">470280</span>  <span class="fl">128.8097</span>  -<span class="fl">10.60239</span> <span class="fl">17.26061</span>
-<span class="dv">470281</span>  <span class="fl">128.8122</span>  -<span class="fl">10.60239</span> <span class="fl">17.27576</span>
-<span class="dv">470282</span>  <span class="fl">128.8147</span>  -<span class="fl">10.60239</span> <span class="fl">17.45896</span></code></pre></div>
-<p>As shown above, the format of the output predictions by the functions for generating spatial predictions is in data.frame and can be exported to relevant format as desired, such as csv or raster, for further use.</p>
+<span class="kw">names</span>(rfokpred1)
+
+[<span class="dv">1</span>] <span class="st">&quot;LON&quot;</span>         <span class="st">&quot;LAT&quot;</span>         <span class="st">&quot;Predictions&quot;</span> <span class="st">&quot;Variances&quot;</span> </code></pre></div>
+<p>As shown above, the format of the output predictions by the functions for generating spatial predictions is in data.frame and can be exported to relevant format as desired, such as csv or raster, for further use. Please note that the variances are now added back to the output, but cautions need to be taken when use them because they are independent of the predictions.</p>
 </div>
 </div>
 </div>
@@ -315,11 +324,13 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </div>
 <div id="references" class="section level2">
 <h2>References</h2>
-<p>Li, J., Potter, A., Huang, Z., Daniell, J. J. and Heap, A. (2010). Predicting Seabed Mud Content across the Australian Margin: Comparison of Statistical and Mathematical Techniques Using a Simulation Experiment. Geoscience Australia, Record 2010 /11, 146pp.</p>
+<p>Li, J., Potter, A., Huang, Z., Daniell, J. J. and Heap, A. 2010. Predicting Seabed Mud Content across the Australian Margin: Comparison of Statistical and Mathematical Techniques Using a Simulation Experiment. Geoscience Australia, Record 2010 /11, 146pp.</p>
 <p>Li, J., Heap, A.D., Potter, A., Huang, Z., Daniell, J., 2011. Can we improve the spatial predictions of seabed sediments? A case study of spatial interpolation of mud content across the southwest Australian margin. Continental Shelf Research 31 1365-1376.</p>
 <p>Li, J., Heap, A.D., Potter, A., Daniell, J., 2011. Application of machine learning methods to spatial interpolation of environmental variables. Environmental Modelling &amp; Software 26 1647-1659.</p>
 <p>Li, J., 2011. Novel spatial interpolation methods for environmental properties: using point samples of mud content as an example. The Survey Statistician: The Newsletter of the International Association of Survey Statisticians No. 63 15-16.</p>
-<p>Li, J., Potter, A., Huang, Z. and Heap, A. (2012) Predicting Seabed Sand Content across the Australian Margin Using Machine Learning and Geostatistical Methods. Geoscience Australia, Record 2012/48, 115pp.</p>
+<p>Li, J., Potter, A., Huang, Z. and Heap, A. 2012. Predicting Seabed Sand Content across the Australian Margin Using Machine Learning and Geostatistical Methods. Geoscience Australia, Record 2012/48, 115pp.</p>
+<p>Li, J., 2016. Assessing spatial predictive models in the environmental sciences: accuracy measures, data variation and variance explained. Environmental Modelling &amp; Software 80 1-8.</p>
+<p>Li, J., 2017. Assessing the accuracy of predictive models for numerical data: Not r nor r2, why not? Then what? PLOS ONE 12 (8): e0183250.</p>
 </div>
 
 

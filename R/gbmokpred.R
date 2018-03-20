@@ -60,7 +60,8 @@
 #' default, 6 is used.
 #' @param ... other arguments passed on to gbm.
 #'
-#' @return A dataframe of longitude, latitude and predictions.
+#' @return A dataframe of longitude, latitude, predictions and variances. The
+#' variances are produced by OK based on the residuals of gbm.
 #'
 #' @note This function is largely based on gbm. When 'A zero or negative range
 #' was fitted to variogram' occurs, to allow OK running, the range was set
@@ -132,10 +133,10 @@ gbmokpred <- function (longlat, trainx, trainy, longlatpredx, predx,
   if (model.1$range[2] <= 0) (model.1$range[2] <- min(vgm1$dist)) # set negative range to be positive
   sp::coordinates(data.pred) = ~ LON + LAT
   ok.pred <- gstat::krige(var1 ~ 1, data.dev, data.pred, model = model.1,
-    nmax = nmax, block = block)$var1.pred
+    nmax = nmax, block = block)
   # gbmok predictions
-  pred.gbmok <- pred.gbm1 + ok.pred
-  gbmok.pred <- cbind(longlatpredx, pred.gbmok)
-  names(gbmok.pred) <- c("LON", "LAT", "Predictions")
+  pred.gbmok <- pred.gbm1 + ok.pred$var1.pred
+  gbmok.pred <- cbind(longlatpredx, pred.gbmok, ok.pred$var1.var)
+  names(gbmok.pred) <- c("LON", "LAT", "Predictions", "Variances")
   gbmok.pred
 }

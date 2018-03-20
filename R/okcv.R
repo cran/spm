@@ -29,7 +29,7 @@
 #' @param ... other arguments passed on to gstat.
 #'
 #' @return A list with the following components:
-#'  me, rme, mae, rmae, mse, rmse, rrmse and vecv; or vecv only
+#'  me, rme, mae, rmae, mse, rmse, rrmse, vecv and e1; or vecv only
 #' @note This function is largely based on rfcv in randomForest and
 #' some functions in library(gstat).  When 'A zero or negative range was fitted
 #' to variogram' occurs, to allow gstat running, the range was set to be positive by

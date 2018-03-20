@@ -54,7 +54,7 @@
 #'
 #' @return A dataframe of longitude, latitude and predictions.
 #'
-#' @note this function is largely based on gbm
+#' @note This function is largely based on gbm.
 #'
 #' @references Greg Ridgeway with contributions from others (2015). gbm:
 #' Generalized Boosted Regression Models. R package version 2.1.1.
@@ -66,7 +66,7 @@
 #' data(sponge)
 #' data(sponge.grid)
 #' gbmpred1 <- gbmpred(sponge[, -c(3)], sponge[, 3], sponge.grid[, c(1:2)],
-#' sponge.grid, family = "poisson", n.cores=2, predacc = "ALL")
+#' sponge.grid, family = "poisson", n.cores=2)
 #' names(gbmpred1)
 #' }
 #'

@@ -1,7 +1,8 @@
-#' @title Generate spatial predictions using the hybrid method of random forest and ordinary kriging (RFOK)
+#' @title Generate spatial predictions using the hybrid method of random forest in
+#' ranger and ordinary kriging (RGOK)
 #'
 #' @description This function is to make spatial predictions using the hybrid
-#' method of random forest and ordinary kriging (RFOK).
+#' method of random forest in ranger and ordinary kriging (RGOK).
 #'
 #' @param longlat a dataframe contains longitude and latitude of validation
 #' samples.
@@ -14,9 +15,12 @@
 #' the grids to be predicted.
 #' @param mtry a function of number of remaining predictor variables to use as
 #' the mtry parameter in the randomForest call.
-#' @param ntree number of trees to grow. This should not be set to too small a
-#' number, to ensure that every input row gets predicted at least a few times.
-#' By default, 500 is used.
+#' @param num.trees number of trees. By default, 500 is used.
+#' @param min.node.size Default 1 for classification, 5 for regression.
+#' @param type Type of prediction. One of 'response', 'se', 'terminalNodes' with
+#' default 'response'. See ranger::predict.ranger for details.
+#' @param num.threads number of threads. Default is number of CPUs available.
+#' @param verbose Show computation status and estimated runtime.Default is FALSE.
 #' @param nmax for local predicting: the number of nearest observations that
 #' should be used for a prediction or simulation, where nearest is
 #' defined in terms of the space of the spatial locations. By default, 12.
@@ -29,48 +33,55 @@
 #' @return A dataframe of longitude, latitude, predictions and variances. The
 #' variances are produced by OK based on the residuals of rf.
 #'
-#' @note This function is largely based rfcv in randomForest.  When 'A zero or
+#' @note This function is largely based rfokpred.  When 'A zero or
 #' negative range was fitted to variogram' occurs, to allow OK running, the
 #' range was set to be positive by using min(vgm1$dist). In this case, caution
 #' should be taken in applying this method, although sometimes it can still
 #' outperform IDW and OK.
 #'
-#' @references Liaw, A. and M. Wiener (2002). Classification and Regression by
-#' randomForest. R News 2(3), 18-22.
+#' @references Wright, M. N. & Ziegler, A. (2017). ranger: A Fast Implementation
+#' of Random Forests for High Dimensional Data in C++ and R. J Stat Softw 77:1-17.
+#' http://dx.doi.org/10.18637/jss.v077.i01.
 #'
 #' @author Jin Li
 #' @examples
 #' \dontrun{
 #' data(petrel)
 #' data(petrel.grid)
-#' rfokpred1 <- rfokpred(petrel[, c(1,2)], petrel[, c(1,2, 6:9)], petrel[, 3],
-#' petrel.grid[, c(1,2)], petrel.grid, ntree = 500, nmax = 12, vgm.args =
+#' rgokpred1 <- rgokpred(petrel[, c(1,2)], petrel[, c(1,2, 6:9)], petrel[, 3],
+#' petrel.grid[, c(1,2)], petrel.grid, num.trees = 500, nmax = 12, vgm.args =
 #' ("Sph"))
-#' names(rfokpred1)
+#' names(rgokpred1)
 #' }
 #'
 #' @export
-rfokpred <- function (longlat, trainx, trainy, longlatpredx, predx, mtry =
-  function(p) max(1, floor(sqrt(p))), ntree = 500, nmax = 12, vgm.args =
-  ("Sph"), block = 0, ...) {
+rgokpred <- function (longlat, trainx, trainy, longlatpredx, predx, mtry = function(p)
+                      max(1, floor(sqrt(p))), num.trees = 500, min.node.size = NULL,
+                      type = "response", num.threads = NULL, verbose = FALSE, nmax = 12,
+                      vgm.args = ("Sph"), block = 0, ...) {
   names(longlat) <- c("LON", "LAT")
   names(longlatpredx) <- c("LON", "LAT")
   p <- ncol(trainx)
-  rf.1 <- randomForest::randomForest(trainx, trainy, mtry = mtry(p), ntree =
-    ntree)
-  rf.pred <- stats::predict(rf.1, predx)
-  data.dev <- longlat
-  data.pred <- longlatpredx
-  data.dev$var1 <- trainy - stats::predict(rf.1, trainx)
-  sp::coordinates(data.dev) = ~ LON + LAT
-  vgm1 <- gstat::variogram(var1 ~ 1, data.dev)
+  data.dev <- trainx
+  data.dev$var1 <- trainy
+  rf1 <- ranger::ranger(var1 ~ ., data = data.dev, mtry = mtry (p), num.trees = num.trees,
+                        min.node.size = min.node.size, num.threads = num.threads,
+                        verbose = verbose)
+  rf.pred <- stats::predict(rf1, data = predx, num.trees = num.trees, type = type,
+                            num.threads = num.threads)$predictions
+  data.dev1 <- longlat
+  data.pred1 <- longlatpredx
+  data.dev1$var1 <- trainy - stats::predict(rf1, data.dev)$predictions
+
+  sp::coordinates(data.dev1) = ~ LON + LAT
+  vgm1 <- gstat::variogram(var1 ~ 1, data.dev1)
   model.1 <- gstat::fit.variogram(vgm1, gstat::vgm(vgm.args))
   if (model.1$range[2] <= 0) (cat("A zero or negative range was fitted to
     variogram. To allow gstat running, the range was set to be positive by
     using min(vgm1$dist). ", "\n"))
   if (model.1$range[2] <= 0) (model.1$range[2] <- min(vgm1$dist)) # set negative range to be positive
-  sp::coordinates(data.pred) = ~ LON + LAT
-  ok.pred <- gstat::krige(var1 ~ 1, data.dev, data.pred, model = model.1,
+  sp::coordinates(data.pred1) = ~ LON + LAT
+  ok.pred <- gstat::krige(var1 ~ 1, data.dev1, data.pred1, model = model.1,
     nmax = nmax, block = block)
   # rfok predictions
   pred.rfok <- rf.pred + ok.pred$var1.pred
