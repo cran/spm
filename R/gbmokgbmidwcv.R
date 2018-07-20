@@ -1,12 +1,14 @@
-#' @title Cross validation, n-fold for the average of the hybrid method of generalized boosted regression modeling and ordinary kriging and the hybrid method of generalized boosted regression modeling and inverse distance weighting (gbmokgbmidw)
+#' @title Cross validation, n-fold for the average of the hybrid method of generalized
+#'  boosted regression modeling and ordinary kriging and the hybrid method of generalized
+#'  boosted regression modeling and inverse distance weighting (gbmokgbmidw)
 #'
 #' @description This function is a cross validation function for the average
 #' of the hybrid method of generalized boosted regression modeling and ordinary
 #' kriging and the hybrid method of generalized boosted regression modeling and
 #' inverse distance weighting.
 #'
-#' @param longlat a dataframe contains longitude and latitude of validation
-#' samples.
+#' @param longlat a dataframe contains longitude and latitude of point
+#' samples (i.e., trainx and trainy).
 #' @param trainx a dataframe or matrix contains columns of predictive variables.
 #' @param trainy a vector of response, must have length equal to the number of
 #' rows in trainx.

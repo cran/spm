@@ -12,8 +12,8 @@ rgokrgidwcv(longlat, trainx, trainy, cv.fold = 10, mtry = function(p) max(1,
   nmaxidw = 12, vgm.args = ("Sph"), block = 0, predacc = "VEcv", ...)
 }
 \arguments{
-\item{longlat}{a dataframe contains longitude and latitude of validation
-samples.}
+\item{longlat}{a dataframe contains longitude and latitude of point
+samples (i.e., trainx and trainy).}
 
 \item{trainx}{a dataframe or matrix contains columns of predictive variables.}
 

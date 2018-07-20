@@ -2,7 +2,8 @@
 % Please edit documentation in R/gbmokcv.R
 \name{gbmokcv}
 \alias{gbmokcv}
-\title{Cross validation, n-fold for the hybrid method of generalized boosted regression modeling and ordinary kriging (gbmok)}
+\title{Cross validation, n-fold for the hybrid method of generalized boosted
+regression modeling and ordinary kriging (gbmok)}
 \usage{
 gbmokcv(longlat, trainx, trainy, var.monotone = rep(0, ncol(trainx)),
   family = "gaussian", n.trees = 3000, learning.rate = 0.001,
@@ -12,8 +13,8 @@ gbmokcv(longlat, trainx, trainy, var.monotone = rep(0, ncol(trainx)),
   block = 0, predacc = "VEcv", n.cores = 6, ...)
 }
 \arguments{
-\item{longlat}{a dataframe contains longitude and latitude of validation
-samples.}
+\item{longlat}{a dataframe contains longitude and latitude of point
+samples (i.e., trainx and trainy).}
 
 \item{trainx}{a dataframe or matrix contains columns of predictive variables.}
 

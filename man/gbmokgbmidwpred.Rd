@@ -2,7 +2,9 @@
 % Please edit documentation in R/gbmokgbmidwpred.R
 \name{gbmokgbmidwpred}
 \alias{gbmokgbmidwpred}
-\title{Generate spatial predictions using the average of the hybrid method of generalized boosted regression modeling and ordinary kriging and the hybrid method of generalized boosted regression modeling and inverse distance weighting (gbmokgbmidw)}
+\title{Generate spatial predictions using the average of the hybrid method of
+generalized boosted regression modeling and ordinary kriging and the hybrid method of
+generalized boosted regression modeling and inverse distance weighting (gbmokgbmidw)}
 \usage{
 gbmokgbmidwpred(longlat, trainx, trainy, longlatpredx, predx,
   var.monotone = rep(0, ncol(trainx)), family = "gaussian",
@@ -13,8 +15,8 @@ gbmokgbmidwpred(longlat, trainx, trainy, longlatpredx, predx,
   vgm.args = ("Sph"), block = 0, n.cores = 6, ...)
 }
 \arguments{
-\item{longlat}{a dataframe contains longitude and latitude of validation
-samples.}
+\item{longlat}{a dataframe contains longitude and latitude of point
+samples (i.e., trainx and trainy).}
 
 \item{trainx}{a dataframe or matrix contains columns of predictive variables.}
 

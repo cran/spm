@@ -9,7 +9,7 @@ okcv(longlat, trainy, cv.fold = 10, nmax = 12, transformation = "none",
   predacc = "VEcv", ...)
 }
 \arguments{
-\item{longlat}{a dataframe contains longitude and latitude of validation
+\item{longlat}{a dataframe contains longitude and latitude of point
 samples.}
 
 \item{trainy}{a vector of response, must have length equal to the number of

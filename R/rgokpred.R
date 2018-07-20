@@ -4,8 +4,8 @@
 #' @description This function is to make spatial predictions using the hybrid
 #' method of random forest in ranger and ordinary kriging (RGOK).
 #'
-#' @param longlat a dataframe contains longitude and latitude of validation
-#' samples.
+#' @param longlat a dataframe contains longitude and latitude of point
+#' samples (i.e., trainx and trainy).
 #' @param trainx a dataframe or matrix contains columns of predictive variables.
 #' @param trainy a vector of response, must have length equal to the number of
 #' rows in trainx.

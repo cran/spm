@@ -2,7 +2,8 @@
 % Please edit documentation in R/gbmokpred.R
 \name{gbmokpred}
 \alias{gbmokpred}
-\title{Generate spatial predictions using the hybrid method of generalized boosted regression modeling and ordinary kriging (gbmok)}
+\title{Generate spatial predictions using the hybrid method of generalized boosted
+regression modeling and ordinary kriging (gbmok)}
 \usage{
 gbmokpred(longlat, trainx, trainy, longlatpredx, predx, var.monotone = rep(0,
   ncol(trainx)), family = "gaussian", n.trees = 3000,
@@ -12,8 +13,8 @@ gbmokpred(longlat, trainx, trainy, longlatpredx, predx, var.monotone = rep(0,
   nmax = 12, vgm.args = ("Sph"), block = 0, n.cores = 6, ...)
 }
 \arguments{
-\item{longlat}{a dataframe contains longitude and latitude of validation
-samples.}
+\item{longlat}{a dataframe contains longitude and latitude of point
+samples (i.e., trainx and trainy).}
 
 \item{trainx}{a dataframe or matrix contains columns of predictive variables.}
 

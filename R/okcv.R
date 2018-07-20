@@ -3,7 +3,7 @@
 #' @description This function is a cross validation function for ordinary
 #' kriging.
 #'
-#' @param longlat a dataframe contains longitude and latitude of validation
+#' @param longlat a dataframe contains longitude and latitude of point
 #' samples.
 #' @param trainy a vector of response, must have length equal to the number of
 #' rows in longlat.

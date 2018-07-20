@@ -2,15 +2,16 @@
 % Please edit documentation in R/rfokpred.R
 \name{rfokpred}
 \alias{rfokpred}
-\title{Generate spatial predictions using the hybrid method of random forest and ordinary kriging (RFOK)}
+\title{Generate spatial predictions using the hybrid method of random forest and
+ordinary kriging (RFOK)}
 \usage{
 rfokpred(longlat, trainx, trainy, longlatpredx, predx, mtry = function(p)
   max(1, floor(sqrt(p))), ntree = 500, nmax = 12, vgm.args = ("Sph"),
   block = 0, ...)
 }
 \arguments{
-\item{longlat}{a dataframe contains longitude and latitude of validation
-samples.}
+\item{longlat}{a dataframe contains longitude and latitude of point
+samples (i.e., trainx and trainy).}
 
 \item{trainx}{a dataframe or matrix contains columns of predictive variables.}
 

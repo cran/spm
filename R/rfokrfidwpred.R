@@ -1,11 +1,13 @@
-#' @title Generate spatial predictions using the average of the hybrid method of random forest and ordinary kriging and the hybrid method of random forest and inverse distance weighting  (RFOKRFIDW)
+#' @title Generate spatial predictions using the average of the hybrid method of
+#' random forest and ordinary kriging and the hybrid method of random forest and
+#' inverse distance weighting  (RFOKRFIDW)
 #'
 #' @description This function is to make spatial predictions using the average
 #' of the hybrid method of random forest and ordinary kriging and the hybrid
 #' method of random forest and inverse distance weighting  (RFOKRFIDW).
 #'
-#' @param longlat a dataframe contains longitude and latitude of validation
-#' samples.
+#' @param longlat a dataframe contains longitude and latitude of point
+#' samples (i.e., trainx and trainy).
 #' @param trainx a dataframe or matrix contains columns of predictive variables.
 #' @param trainy a vector of response, must have length equal to the number of
 #' rows in trainx.

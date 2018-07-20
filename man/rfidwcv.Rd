@@ -2,15 +2,16 @@
 % Please edit documentation in R/rfidwcv.R
 \name{rfidwcv}
 \alias{rfidwcv}
-\title{Cross validation, n-fold for the hybrid method of random forest and inverse distance weighting (RFIDW)}
+\title{Cross validation, n-fold for the hybrid method of random forest and
+inverse distance weighting (RFIDW)}
 \usage{
 rfidwcv(longlat, trainx, trainy, cv.fold = 10, mtry = function(p) max(1,
   floor(sqrt(p))), ntree = 500, idp = 2, nmax = 12, predacc = "VEcv",
   ...)
 }
 \arguments{
-\item{longlat}{a dataframe contains longitude and latitude of validation
-samples.}
+\item{longlat}{a dataframe contains longitude and latitude of point
+samples (i.e., trainx and trainy).}
 
 \item{trainx}{a dataframe or matrix contains columns of predictive variables.}
 

@@ -3,7 +3,7 @@
 #' @description This function is to make spatial predictions using inverse
 #' distance weighting.
 #'
-#' @param longlat a dataframe contains longitude and latitude of samples.
+#' @param longlat a dataframe contains longitude and latitude of point samples.
 #' @param trainy a vector of response, must have length equal to the number of
 #' rows in longlat.
 #' @param longlat2 a dataframe contains longitude and latitude of point locations

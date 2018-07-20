@@ -1,10 +1,11 @@
-#' @title Cross validation, n-fold for the hybrid method of generalized boosted regression modeling and ordinary kriging (gbmok)
+#' @title Cross validation, n-fold for the hybrid method of generalized boosted
+#' regression modeling and ordinary kriging (gbmok)
 #'
 #' @description This function is a cross validation function for the hybrid
 #' method of generalized boosted regression modeling and ordinary kriging.
 #'
-#' @param longlat a dataframe contains longitude and latitude of validation
-#' samples.
+#' @param longlat a dataframe contains longitude and latitude of point
+#' samples (i.e., trainx and trainy).
 #' @param trainx a dataframe or matrix contains columns of predictive variables.
 #' @param trainy a vector of response, must have length equal to the number of
 #' rows in trainx.

@@ -2,15 +2,17 @@
 % Please edit documentation in R/rfokrfidwpred.R
 \name{rfokrfidwpred}
 \alias{rfokrfidwpred}
-\title{Generate spatial predictions using the average of the hybrid method of random forest and ordinary kriging and the hybrid method of random forest and inverse distance weighting  (RFOKRFIDW)}
+\title{Generate spatial predictions using the average of the hybrid method of
+random forest and ordinary kriging and the hybrid method of random forest and
+inverse distance weighting  (RFOKRFIDW)}
 \usage{
 rfokrfidwpred(longlat, trainx, trainy, longlatpredx, predx, mtry = function(p)
   max(1, floor(sqrt(p))), ntree = 500, idp = 2, nmaxok = 12,
   nmaxidw = 12, vgm.args = ("Sph"), block = 0, ...)
 }
 \arguments{
-\item{longlat}{a dataframe contains longitude and latitude of validation
-samples.}
+\item{longlat}{a dataframe contains longitude and latitude of point
+samples (i.e., trainx and trainy).}
 
 \item{trainx}{a dataframe or matrix contains columns of predictive variables.}
 
