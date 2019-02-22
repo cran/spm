@@ -12,7 +12,7 @@
 
 <meta name="author" content="Jin Li (jin.li@ga.gov.au; jinli68@gmail.com)" />
 
-<meta name="date" content="2018-07-20" />
+<meta name="date" content="2019-02-22" />
 
 <title>A Brief Introduction to the spm Package</title>
 
@@ -70,14 +70,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <h1 class="title toc-ignore">A Brief Introduction to the spm Package</h1>
 <h4 class="author"><em>Jin Li (<a href="mailto:jin.li@ga.gov.au">jin.li@ga.gov.au</a>; <a href="mailto:jinli68@gmail.com">jinli68@gmail.com</a>)</em></h4>
-<h4 class="date"><em>2018-07-20</em></h4>
+<h4 class="date"><em>2019-02-22</em></h4>
 
 
 
 <div id="introduction" class="section level2">
 <h2>1 Introduction</h2>
 <p>The package ‘spm’ is short for ‘spatial predictive modelling, spatial predictive model(s), or spatial predictive method(s)’. It aims to introduce some novel, accurate, hybrid geostatistical and machine learning methods for spatial predictive modelling. It contains functions for a few geostatistical and machine learning methods as well as their hybrid methods. Further methods will be included in the future according to their predictive accuracy and new developments in spatial predictive modelling field.</p>
-<p>For each method, two functions are provided. They all use data.frame as input data. Moreover, two functions are provided for accuracy assessment, and a further function is for converting error measures (e.g., rmse) to accuracy measure (i.e., vecv). These functions attempt to simplify and streamline the model evaluation and model application processes, which may assist users to apply these methods to their data to improve modelling efficiency as well as predictive accuracy.</p>
+<p>For each method, two functions are provided. Two further functions are provided to derive averaged variable importance and relative variable influence respectievly. They all use data.frame as input data. Moreover, two functions are provided for accuracy assessment, and a further function is for converting error measures (e.g., rmse) to accuracy measure (i.e., vecv). These functions attempt to simplify and streamline the model evaluation and model application processes, which may assist users to apply these methods to their data to improve modelling efficiency as well as predictive accuracy.</p>
 </div>
 <div id="spatial-predictive-methods" class="section level2">
 <h2>2 Spatial predictive methods</h2>
@@ -92,10 +92,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </div>
 <div id="functions" class="section level2">
 <h2>3 Functions</h2>
+<div id="averaged-variable-importance-and-relative-variable-influence" class="section level3">
+<h3>3.1 Averaged variable importance and relative variable influence</h3>
+<p>A function, avi, is developed to derive an averaged variable importance (avi) based on random forest. And a function, rvi, to a derive relative variable influence (rvi) based on generalized boosted regression modeling.</p>
+</div>
 <div id="accuracy-assessment" class="section level3">
-<h3>3.1 Accuracy assessment</h3>
+<h3>3.2 Accuracy assessment</h3>
 <div id="cross-validation" class="section level4">
-<h4>3.1.1 Cross validation</h4>
+<h4>3.2.1 Cross validation</h4>
 <p>Of the two functions for each method, one is for assessing the predictive errors and accuracy of the method based on cross-validation. These functions are:</p>
 <ul>
 <li>idwcv,</li>
@@ -162,19 +166,19 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </div>
 </div>
 <div id="accuracy-and-error-measures" class="section level4">
-<h4>3.1.2 Accuracy and error measures</h4>
+<h4>3.2.2 Accuracy and error measures</h4>
 <p>A unit, scale and data-variance independent accuracy measure, the vecv (i.e., variance explained by predictive models based on cross-validation) is implemented in function vecv for numerical data.</p>
 <p>A few other error and accuracy measures are also available in function pred.acc for numerical data, including mean error (me), mean absolute error (mae), mean squared error (mse), relative me (rme), relative mae (rmae), root mse (rmse), relative rmse (rrmse), as well as the accuracy measure, vecv and Legates and McCabe’s E1 (e1).</p>
 <p>pred.acc can also be sued to calculate correct classification rate (ccr), kappa (kappa), sensitivity (sens), specificity (spec) and true skill statistic (tss) for categorical data with the observed (obs) data specified as factor.</p>
 <p>They are based on the differences between the predicted values for and the observed values of validation samples for cross-validation. For 0 and 1 data, the observed values need to be specified as factor in order to use accuracy measures for categorical data. Moreover, sens, spec, tss and rmse are for categorical data with two levels (e.g. presence and absence data).</p>
 </div>
 <div id="convering-error-measures-to-vecv" class="section level4">
-<h4>3.1.3 Convering error measures to vecv</h4>
+<h4>3.2.3 Convering error measures to vecv</h4>
 <p>A function, tovecv, is developed to convert existing predictive error measures to vecv. For the definition of vecv, please see function vecv in library (spm). The error measures considered are mean square error (mse), root mse (rmse), relative rmse (rrmse), standardised rmse (srmse) and mean square reduced error (msre).</p>
 </div>
 </div>
 <div id="generate-spatial-predictions" class="section level3">
-<h3>3.2 Generate spatial predictions</h3>
+<h3>3.3 Generate spatial predictions</h3>
 <p>The other function for each method is for generating the spatial predictions using the method, including:</p>
 <ul>
 <li>idwpred,</li>

@@ -1,6 +1,7 @@
-d814f92e7239ce452ef38b434b53b38d *DESCRIPTION
-6ffe3f6b532ff78a04d6b90a0f5b3d53 *NAMESPACE
-85d03b15f229c390e1baca9d38f3ef6e *R/RFcv.R
+3d972e108ba0f2539d0252135b1fc732 *DESCRIPTION
+e414fe14f484bb2ca6c7a3cb6c579320 *NAMESPACE
+2eead286b566a5fa97afd76b05a583d0 *R/RFcv.R
+50134bf7f6c0e2c7bd6671559873e5bd *R/avi.R
 624f89c52d38d435e66a8af0255bc933 *R/gbmcv.R
 ce743a332af2e20cb4aecc389bd70b1f *R/gbmidwcv.R
 70a637018541e2bfe9873e9f427efc00 *R/gbmidwpred.R
@@ -21,7 +22,7 @@ de15d5ce151a250eb991724f87691c2b *R/rfokcv.R
 7979a5cf81b3ba1da486db1ec7b541f8 *R/rfokrfidwcv.R
 7ebf23a13fb06b972eb310e5244f8059 *R/rfokrfidwpred.R
 80ce46a035f2d095fd1ff9448420a396 *R/rfpred.R
-050a08de35875c8f8ac1b6da36816378 *R/rgcv.R
+a889ad79ff03b1bcdebdb7d912f3fba4 *R/rgcv.R
 4f85a7b1c7d6a35d5c9abc5cbfb68c10 *R/rgidwcv.R
 32ca58f47c76fbbb93b0c7ea3294f6a9 *R/rgidwpred.R
 1af960be385846ea06def108932397de *R/rgokcv.R
@@ -29,6 +30,7 @@ de15d5ce151a250eb991724f87691c2b *R/rfokcv.R
 f15a1a3bc3087b5ac53bd8a3de0e3dce *R/rgokrgidwcv.R
 e2b98a043a35c63c8cffbf8148011ebd *R/rgokrgidwpred.R
 920beeecf7a6fa6f5ccc2e582c6642fe *R/rgpred.R
+f38245635d12e3a11e5c5018d8a30e5e *R/rvi.R
 00c3b362f1130e31dd17a55b60bcfedf *R/tovecv.acc.R
 dd596df0b74dfa846d42505b48bc88e8 *R/vecv.acc.R
 377e1d5e28e02087e8ec5291f8a461b6 *build/vignette.rds
@@ -41,9 +43,10 @@ a1d9739b394e5d038d038d2c9f2328a4 *data/sponge.rda
 7d7c320f33743a533608cc54af4e4016 *data/sw.rda
 22494cafef41f2b71f6a4022a2907630 *data/swmud.rda
 4216827c8b5ce0ddbc55ea822dee2a46 *inst/doc/spm.R
-312113b9c16fa5d8f347e1d76038f182 *inst/doc/spm.Rmd
-36ec462cf4ac9d12fe027e4af7b498a3 *inst/doc/spm.html
-b69887cf304fa52ce2878a24911680e5 *man/RFcv.Rd
+0d9f2d43aacb6bcb5595637cd9bbff30 *inst/doc/spm.Rmd
+d311246d946ac260d47cab27d07a21c1 *inst/doc/spm.html
+14738f9d5b8ee552ce3e59ced1f7cb88 *man/RFcv.Rd
+99290237e27215de81988e7363a92587 *man/avi.Rd
 bc891d8a8dda46f123ee4845eea70a81 *man/cran-comments.Rd
 6044b62eeded7be61594e06d1d496839 *man/gbmcv.Rd
 cf5b9545e7b86c5490adb2bb18a2399e *man/gbmidwcv.Rd
@@ -68,7 +71,7 @@ e196e52afcf78e5cf3d0a565cb41c468 *man/rfokpred.Rd
 6a652139edff2e0ba330a2b199deffc8 *man/rfokrfidwcv.Rd
 9a057fb543834945375a191b5a4da0e3 *man/rfokrfidwpred.Rd
 52d2bc3f68e0aeb3bffb7ff632fa3d2a *man/rfpred.Rd
-499612327311024d69df8e971dd6b0c7 *man/rgcv.Rd
+8a0519dd6acd2ecd5ed39163c6bed7ce *man/rgcv.Rd
 5a11244a63de450399d31857a09667e8 *man/rgidwcv.Rd
 feb7b31863eda3bd51c6038b960a50a1 *man/rgidwpred.Rd
 d56ae466e49d6a6f302dc3969830a7b5 *man/rgokcv.Rd
@@ -76,10 +79,11 @@ d56ae466e49d6a6f302dc3969830a7b5 *man/rgokcv.Rd
 72d0a527ba720d580cb3a41f68f23c55 *man/rgokrgidwcv.Rd
 9ad8b0155e8182048d5086fa780e74e4 *man/rgokrgidwpred.Rd
 b8f39747aef51bdbdd419f828d58cfd9 *man/rgpred.Rd
+3c3b0ab1aea41e22b14f76df9f85ee76 *man/rvi.Rd
 eeab3b4cd236e3edac89cc22d9ac57ae *man/sponge.Rd
 3741fa9be5b714cc04a60f8016293185 *man/sponge.grid.Rd
 ce32b58c9c441b6aef2a21baafeb1cc7 *man/sw.Rd
 fd1708f013731942dfcac039f666b6dc *man/swmud.Rd
 68dea16ec3e57f9fa9fd3b142a27dce0 *man/tovecv.Rd
 fa8ee2585a82f826132884ac05713e37 *man/vecv.Rd
-312113b9c16fa5d8f347e1d76038f182 *vignettes/spm.Rmd
+0d9f2d43aacb6bcb5595637cd9bbff30 *vignettes/spm.Rmd

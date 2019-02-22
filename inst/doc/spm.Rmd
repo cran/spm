@@ -12,7 +12,7 @@ vignette: >
 
 The package 'spm' is short for 'spatial predictive modelling, spatial predictive model(s), or spatial predictive method(s)'. It aims to introduce some novel, accurate, hybrid geostatistical and machine learning methods for spatial predictive modelling. It contains functions for a few geostatistical and machine learning methods as well as their hybrid methods. Further methods will be included in the future according to their predictive accuracy and new developments in spatial predictive modelling field.
 
-For each method, two functions are provided. They all use data.frame as input data. Moreover, two functions are provided for accuracy assessment, and a further function is for converting error measures (e.g., rmse) to accuracy measure (i.e., vecv). These functions attempt to simplify and streamline the model evaluation and model application processes, which may assist users to apply these methods to their data to improve modelling efficiency as well as predictive accuracy. 
+For each method, two functions are provided. Two further functions are provided to derive averaged variable importance and relative variable influence respectievly. They all use data.frame as input data. Moreover, two functions are provided for accuracy assessment, and a further function is for converting error measures (e.g., rmse) to accuracy measure (i.e., vecv). These functions attempt to simplify and streamline the model evaluation and model application processes, which may assist users to apply these methods to their data to improve modelling efficiency as well as predictive accuracy. 
 
 ## 2 Spatial predictive methods
 
@@ -26,8 +26,11 @@ The methods currently included in the package are:
 
 
 ## 3 Functions
-### 3.1 Accuracy assessment
-#### 3.1.1 Cross validation
+### 3.1 Averaged variable importance and relative variable influence
+A function, avi, is developed to derive an averaged variable importance (avi) based on random forest. And a function, rvi, to a derive relative variable influence (rvi) based on generalized boosted regression modeling.
+
+### 3.2 Accuracy assessment
+#### 3.2.1 Cross validation
 Of the two functions for each method, one is for assessing the predictive errors and accuracy of the method based on cross-validation. These functions are:
 
  - idwcv, 
@@ -61,7 +64,7 @@ The procedure for these functions can be summarised in Table 1.
 
 The accuracy produced from the above procedure may change with each run due to randomness associated with data resampling for cross validation. To stabilise the accuracy measure, the above steps need to be repeated n times; and the accuracy assessment function for each method provides an useful tool to realise this as demonstrated in section 4.3. 
 
-#### 3.1.2 Accuracy and error measures
+#### 3.2.2 Accuracy and error measures
 A unit, scale and data-variance independent accuracy measure, the vecv (i.e., variance explained by predictive models based on cross-validation) is implemented in function vecv for numerical data. 
 
 A few other error and accuracy measures are also available in function pred.acc for numerical data, including mean error (me), mean absolute error (mae), mean squared error (mse), relative me (rme), relative mae (rmae), root mse (rmse), relative rmse (rrmse), as well as the accuracy measure, vecv and Legates and McCabe's E1 (e1).
@@ -70,10 +73,10 @@ pred.acc can also be sued to calculate correct classification rate (ccr), kappa 
 
 They are based on the differences between the predicted values for and the observed values of validation samples for cross-validation. For 0 and 1 data, the observed values need to be specified as factor in order to use accuracy measures for categorical data. Moreover, sens, spec, tss and rmse are for categorical data with two levels (e.g. presence and absence data).
 
-#### 3.1.3 Convering error measures to vecv
+#### 3.2.3 Convering error measures to vecv
 A function, tovecv, is developed to convert existing predictive error measures to vecv. For the definition of vecv, please see function vecv in library (spm). The error measures considered are mean square error (mse), root mse (rmse), relative rmse (rrmse), standardised rmse (srmse) and mean square reduced error (msre).
 
-### 3.2 Generate spatial predictions
+### 3.3 Generate spatial predictions
 The other function for each method is for generating the spatial predictions using the method, including:
 
  - idwpred, 

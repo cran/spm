@@ -65,7 +65,7 @@ n <- 20 # number of iterations, 60 to 100 is recommended.
 measures <- NULL
 for (i in 1:n) {
 rfcv1 <- RFcv(hard[, c(4:6)], hard[, 17])
-measures <- rbind(measures, rfcv1$ccr) # for kappa, replace ccr.cv with kappa.cv
+measures <- rbind(measures, rfcv1$ccr) # for kappa, replace ccr with kappa
 }
 plot(measures ~ c(1:n), xlab = "Iteration for RF", ylab = "Correct
 classification rate  (\%)")

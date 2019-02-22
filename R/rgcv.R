@@ -57,7 +57,7 @@
 #' measures <- NULL
 #' for (i in 1:n) {
 #' rgcv1 <- rgcv(hard[, c(4:6)], hard[, 17])
-#' measures <- rbind(measures, rgcv1$ccr) # for kappa, replace ccr.cv with kappa.cv
+#' measures <- rbind(measures, rgcv1$ccr) # for kappa, replace ccr with kappa
 #' }
 #' plot(measures ~ c(1:n), xlab = "Iteration for RF", ylab = "Correct
 #' classification rate  (%)")
