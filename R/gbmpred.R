@@ -1,4 +1,4 @@
-#' @title Generate spatial predictions using generalized boosted regression modeling (gbm)
+#' @title Generate spatial predictions using generalized boosted regression modeling (`gbm`)
 #'
 #' @description This function is to make spatial predictions using generalized
 #' boosted regression modeling.
@@ -16,7 +16,7 @@
 #' a vector of 0 is used.
 #' @param family either a character string specifying the name of the distribution to
 #' use or a list with a component name specifying the distribution and any
-#' additional parameters needed. See gbm for details. By default, "gaussian" is
+#' additional parameters needed. See `gbm` for details. By default, "gaussian" is
 #' used.
 #' @param n.trees the total number of trees to fit. This is equivalent to the
 #' number of iterations and the number of basis functions in the additive
@@ -28,33 +28,33 @@
 #' interactions, etc. By default, 2 is used.
 #' @param bag.fraction the fraction of the training set observations randomly
 #' selected to propose the next tree in the expansion. By default, 0.5 is used.
-#' @param train.fraction The first train.fraction * nrows(data) observations
-#' are used to fit the gbm and the remainder are used for computing
+#' @param train.fraction The first `train.fraction * nrows(data)` observations
+#' are used to fit the `gbm` and the remainder are used for computing
 #' out-of-sample estimates of the loss function.
 #' @param n.minobsinnode minimum number of observations in the trees terminal
 #' nodes. Note that this is the actual number of observations not the total
 #' weight. By default, 10 is used.
 #' @param cv.fold integer; number of cross-validation folds to perform within
-#' gbm. if > 1, then apply n-fold cross validation; the default is 10, i.e.,
+#' `gbm`. if > 1, then apply n-fold cross validation; the default is 10, i.e.,
 #' 10-fold cross validation that is recommended.
 #' @param weights an optional vector of weights to be used in the fitting
 #' process. Must be positive but do not need to be normalized.
-#' If keep.data = FALSE in the initial call to gbm then it is the user's
-#' responsibility to resupply the weights to gbm.more. By default, a vector of
+#' If keep.data = FALSE in the initial call to `gbm` then it is the user's
+#' responsibility to resupply the weights to `gbm.more`. By default, a vector of
 #' 1 is used.
 #' @param keep.data a logical variable indicating whether to keep the data and
 #' an index of the data stored with the object. Keeping the data and index
-#' makes subsequent calls to gbm.more faster at the cost of storing an extra
+#' makes subsequent calls to `gbm.more` faster at the cost of storing an extra
 #' copy of the dataset. By default, 'FALSE' is used.
-#' @param verbose If TRUE, gbm will print out progress and performance
+#' @param verbose If TRUE, `gbm` will print out progress and performance
 #' indicators. By default, 'TRUE' is used.
-#' @param n.cores The number of CPU cores to use. See gbm for details. By
+#' @param n.cores The number of CPU cores to use. See `gbm` for details. By
 #' default, 6 is used.
-#' @param ... other arguments passed on to gbm.
+#' @param ... other arguments passed on to `gbm`.
 #'
 #' @return A dataframe of longitude, latitude and predictions.
 #'
-#' @note This function is largely based on gbm.
+#' @note This function is largely based on `gbm`.
 #'
 #' @references Greg Ridgeway with contributions from others (2015). gbm:
 #' Generalized Boosted Regression Models. R package version 2.1.1.
@@ -80,7 +80,7 @@ gbmpred <- function (trainx, trainy, longlatpredx, predx,
   bag.fraction = 0.5,
   train.fraction = 1.0,
   n.minobsinnode = 10,
-  cv.fold = 10,
+  cv.fold = 10, # this is required for `gbm.perf`
   weights = rep(1, nrow(trainx)),   # by default set equal
   keep.data = FALSE,
   verbose = TRUE,

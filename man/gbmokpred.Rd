@@ -5,12 +5,30 @@
 \title{Generate spatial predictions using the hybrid method of generalized boosted
 regression modeling and ordinary kriging (gbmok)}
 \usage{
-gbmokpred(longlat, trainx, trainy, longlatpredx, predx, var.monotone = rep(0,
-  ncol(trainx)), family = "gaussian", n.trees = 3000,
-  learning.rate = 0.001, interaction.depth = 2, bag.fraction = 0.5,
-  train.fraction = 1, n.minobsinnode = 10, cv.fold = 10,
-  weights = rep(1, nrow(trainx)), keep.data = FALSE, verbose = TRUE,
-  nmax = 12, vgm.args = ("Sph"), block = 0, n.cores = 6, ...)
+gbmokpred(
+  longlat,
+  trainx,
+  trainy,
+  longlatpredx,
+  predx,
+  var.monotone = rep(0, ncol(trainx)),
+  family = "gaussian",
+  n.trees = 3000,
+  learning.rate = 0.001,
+  interaction.depth = 2,
+  bag.fraction = 0.5,
+  train.fraction = 1,
+  n.minobsinnode = 10,
+  cv.fold = 10,
+  weights = rep(1, nrow(trainx)),
+  keep.data = FALSE,
+  verbose = TRUE,
+  nmax = 12,
+  vgm.args = ("Sph"),
+  block = 0,
+  n.cores = 6,
+  ...
+)
 }
 \arguments{
 \item{longlat}{a dataframe contains longitude and latitude of point
@@ -60,7 +78,8 @@ nodes. Note that this is the actual number of observations not the total
 weight. By default, 10 is used.}
 
 \item{cv.fold}{integer; number of cross-validation folds to perform within
-gbm.}
+gbm. if > 1, then apply n-fold cross validation; the default is 10, i.e.,
+10-fold cross validation that is recommended.}
 
 \item{weights}{an optional vector of weights to be used in the fitting
 process. Must be positive but do not need to be normalized.

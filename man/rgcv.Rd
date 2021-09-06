@@ -4,10 +4,19 @@
 \alias{rgcv}
 \title{Cross validation, n-fold for random forest in ranger (RG)}
 \usage{
-rgcv(trainx, trainy, cv.fold = 10, mtry = if (!is.null(trainy) &&
-  !is.factor(trainy)) max(floor(ncol(trainx)/3), 1) else
-  floor(sqrt(ncol(trainx))), num.trees = 500, min.node.size = NULL,
-  num.threads = NULL, verbose = FALSE, predacc = "ALL", ...)
+rgcv(
+  trainx,
+  trainy,
+  cv.fold = 10,
+  mtry = if (!is.null(trainy) && !is.factor(trainy)) max(floor(ncol(trainx)/3), 1) else
+    floor(sqrt(ncol(trainx))),
+  num.trees = 500,
+  min.node.size = NULL,
+  num.threads = NULL,
+  verbose = FALSE,
+  predacc = "ALL",
+  ...
+)
 }
 \arguments{
 \item{trainx}{a dataframe or matrix contains columns of predictor variables.}

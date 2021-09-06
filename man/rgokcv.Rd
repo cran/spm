@@ -5,10 +5,22 @@
 \title{Cross validation, n-fold for the hybrid method of random forest in ranger
 and ordinary kriging (RGFOK)}
 \usage{
-rgokcv(longlat, trainx, trainy, cv.fold = 10, mtry = function(p) max(1,
-  floor(sqrt(p))), num.trees = 500, min.node.size = NULL,
-  num.threads = NULL, verbose = FALSE, nmax = 12, vgm.args = ("Sph"),
-  block = 0, predacc = "VEcv", ...)
+rgokcv(
+  longlat,
+  trainx,
+  trainy,
+  cv.fold = 10,
+  mtry = function(p) max(1, floor(sqrt(p))),
+  num.trees = 500,
+  min.node.size = NULL,
+  num.threads = NULL,
+  verbose = FALSE,
+  nmax = 12,
+  vgm.args = ("Sph"),
+  block = 0,
+  predacc = "VEcv",
+  ...
+)
 }
 \arguments{
 \item{longlat}{a dataframe contains longitude and latitude of point

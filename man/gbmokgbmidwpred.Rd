@@ -6,13 +6,32 @@
 generalized boosted regression modeling and ordinary kriging and the hybrid method of
 generalized boosted regression modeling and inverse distance weighting (gbmokgbmidw)}
 \usage{
-gbmokgbmidwpred(longlat, trainx, trainy, longlatpredx, predx,
-  var.monotone = rep(0, ncol(trainx)), family = "gaussian",
-  n.trees = 3000, learning.rate = 0.001, interaction.depth = 2,
-  bag.fraction = 0.5, train.fraction = 1, n.minobsinnode = 10,
-  cv.fold = 10, weights = rep(1, nrow(trainx)), keep.data = FALSE,
-  verbose = TRUE, idp = 2, nmaxidw = 12, nmaxok = 12,
-  vgm.args = ("Sph"), block = 0, n.cores = 6, ...)
+gbmokgbmidwpred(
+  longlat,
+  trainx,
+  trainy,
+  longlatpredx,
+  predx,
+  var.monotone = rep(0, ncol(trainx)),
+  family = "gaussian",
+  n.trees = 3000,
+  learning.rate = 0.001,
+  interaction.depth = 2,
+  bag.fraction = 0.5,
+  train.fraction = 1,
+  n.minobsinnode = 10,
+  cv.fold = 0,
+  weights = rep(1, nrow(trainx)),
+  keep.data = FALSE,
+  verbose = TRUE,
+  idp = 2,
+  nmaxidw = 12,
+  nmaxok = 12,
+  vgm.args = ("Sph"),
+  block = 0,
+  n.cores = 6,
+  ...
+)
 }
 \arguments{
 \item{longlat}{a dataframe contains longitude and latitude of point

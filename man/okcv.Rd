@@ -4,9 +4,20 @@
 \alias{okcv}
 \title{Cross validation, n-fold for ordinary kriging (OK)}
 \usage{
-okcv(longlat, trainy, cv.fold = 10, nmax = 12, transformation = "none",
-  delta = 1, vgm.args = ("Sph"), anis = c(0, 1), alpha = 0, block = 0,
-  predacc = "VEcv", ...)
+okcv(
+  longlat,
+  trainy,
+  cv.fold = 10,
+  nmax = 12,
+  transformation = "none",
+  delta = 1,
+  vgm.args = ("Sph"),
+  anis = c(0, 1),
+  alpha = 0,
+  block = 0,
+  predacc = "VEcv",
+  ...
+)
 }
 \arguments{
 \item{longlat}{a dataframe contains longitude and latitude of point

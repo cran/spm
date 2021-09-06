@@ -4,9 +4,19 @@
 \alias{okpred}
 \title{Generate spatial predictions using ordinary kriging (OK)}
 \usage{
-okpred(longlat, trainy, longlat2, nmax = 12, transformation = "none",
-  delta = 1, vgm.args = ("Sph"), anis = c(0, 1), alpha = 0, block = 0,
-  ...)
+okpred(
+  longlat,
+  trainy,
+  longlat2,
+  nmax = 12,
+  transformation = "none",
+  delta = 1,
+  vgm.args = ("Sph"),
+  anis = c(0, 1),
+  alpha = 0,
+  block = 0,
+  ...
+)
 }
 \arguments{
 \item{longlat}{a dataframe contains longitude and latitude of point

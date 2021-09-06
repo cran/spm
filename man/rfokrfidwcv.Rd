@@ -4,9 +4,21 @@
 \alias{rfokrfidwcv}
 \title{Cross validation, n-fold for the average of the hybrid method of random forest and ordinary kriging and the hybrid method of random forest and inverse distance weighting  (RFOKRFIDW)}
 \usage{
-rfokrfidwcv(longlat, trainx, trainy, cv.fold = 10, mtry = function(p) max(1,
-  floor(sqrt(p))), ntree = 500, idp = 2, nmaxok = 12, nmaxidw = 12,
-  vgm.args = ("Sph"), block = 0, predacc = "VEcv", ...)
+rfokrfidwcv(
+  longlat,
+  trainx,
+  trainy,
+  cv.fold = 10,
+  mtry = function(p) max(1, floor(sqrt(p))),
+  ntree = 500,
+  idp = 2,
+  nmaxok = 12,
+  nmaxidw = 12,
+  vgm.args = ("Sph"),
+  block = 0,
+  predacc = "VEcv",
+  ...
+)
 }
 \arguments{
 \item{longlat}{a dataframe contains longitude and latitude of point

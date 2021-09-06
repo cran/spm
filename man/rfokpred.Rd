@@ -5,9 +5,19 @@
 \title{Generate spatial predictions using the hybrid method of random forest and
 ordinary kriging (RFOK)}
 \usage{
-rfokpred(longlat, trainx, trainy, longlatpredx, predx, mtry = function(p)
-  max(1, floor(sqrt(p))), ntree = 500, nmax = 12, vgm.args = ("Sph"),
-  block = 0, ...)
+rfokpred(
+  longlat,
+  trainx,
+  trainy,
+  longlatpredx,
+  predx,
+  mtry = function(p) max(1, floor(sqrt(p))),
+  ntree = 500,
+  nmax = 12,
+  vgm.args = ("Sph"),
+  block = 0,
+  ...
+)
 }
 \arguments{
 \item{longlat}{a dataframe contains longitude and latitude of point

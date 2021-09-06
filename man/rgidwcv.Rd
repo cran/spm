@@ -5,10 +5,21 @@
 \title{Cross validation, n-fold for the hybrid method of random forest in ranger
 and inverse distance weighting (RGIDW)}
 \usage{
-rgidwcv(longlat, trainx, trainy, cv.fold = 10, mtry = function(p) max(1,
-  floor(sqrt(p))), num.trees = 500, min.node.size = NULL,
-  num.threads = NULL, verbose = FALSE, idp = 2, nmax = 12,
-  predacc = "VEcv", ...)
+rgidwcv(
+  longlat,
+  trainx,
+  trainy,
+  cv.fold = 10,
+  mtry = function(p) max(1, floor(sqrt(p))),
+  num.trees = 500,
+  min.node.size = NULL,
+  num.threads = NULL,
+  verbose = FALSE,
+  idp = 2,
+  nmax = 12,
+  predacc = "VEcv",
+  ...
+)
 }
 \arguments{
 \item{longlat}{a dataframe contains longitude and latitude of point

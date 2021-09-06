@@ -1,7 +1,7 @@
-## ---- include=TRUE, eval=FALSE-------------------------------------------
+## ---- include=TRUE, eval=FALSE------------------------------------------------
 #  install.packages("spm", dependencies = c("Imports", "Suggests"))
 
-## ---- include=TRUE, eval=FALSE-------------------------------------------
+## ---- include=TRUE, eval=FALSE------------------------------------------------
 #  library(spm)
 #  data(petrel)
 #  set.seed(1234)
@@ -9,7 +9,7 @@
 #  idwcv1
 #  [1] 23.11333
 
-## ---- include=TRUE, eval=FALSE-------------------------------------------
+## ---- include=TRUE, eval=FALSE------------------------------------------------
 #  library(spm)
 #  data(petrel)
 #  set.seed(1234)
@@ -17,7 +17,7 @@
 #  rfokcv1
 #  [1] 39.88995
 
-## ---- include=TRUE, eval=FALSE-------------------------------------------
+## ---- include=TRUE, eval=FALSE------------------------------------------------
 #  data(petrel)
 #  idp <- c((1:10)*0.2)
 #  nmax <- c(10:20)
@@ -37,7 +37,7 @@
 #  nmax[3]
 #  > [1] 12
 
-## ---- include=TRUE, eval=FALSE-------------------------------------------
+## ---- include=TRUE, eval=FALSE------------------------------------------------
 #  library(spm)
 #  data(petrel)
 #  set.seed(1234)
@@ -45,7 +45,7 @@
 #  idwcv1
 #  [1] 35.93557
 
-## ---- include=TRUE, eval=FALSE-------------------------------------------
+## ---- include=TRUE, eval=FALSE------------------------------------------------
 #  n <- 100 # number of iterations, 60 to 100 is recommended.
 #  measures <- NULL
 #  for (i in 1:n) {
@@ -55,7 +55,7 @@
 #  mean(measures)
 #  [1] 33.69691
 
-## ---- include=TRUE, eval=FALSE-------------------------------------------
+## ---- include=TRUE, eval=FALSE------------------------------------------------
 #  library(spm)
 #  data(petrel)
 #  data(petrel.grid)
@@ -75,7 +75,7 @@
 #  470281  128.8122  -10.60239 22.00855
 #  470282  128.8147  -10.60239 22.00873
 
-## ---- include=TRUE, eval=FALSE-------------------------------------------
+## ---- include=TRUE, eval=FALSE------------------------------------------------
 #  set.seed(1234)
 #  library(spm)
 #  data(petrel)

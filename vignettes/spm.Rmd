@@ -1,6 +1,6 @@
 ---
 title: "A Brief Introduction to the spm Package"
-author: "Jin Li (jin.li@ga.gov.au; jinli68@gmail.com)"
+author: "Jin Li (jinli68@gmail.com)"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >

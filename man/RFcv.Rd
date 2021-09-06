@@ -4,9 +4,16 @@
 \alias{RFcv}
 \title{Cross validation, n-fold for random forest (RF)}
 \usage{
-RFcv(trainx, trainy, cv.fold = 10, mtry = if (!is.null(trainy) &&
-  !is.factor(trainy)) max(floor(ncol(trainx)/3), 1) else
-  floor(sqrt(ncol(trainx))), ntree = 500, predacc = "ALL", ...)
+RFcv(
+  trainx,
+  trainy,
+  cv.fold = 10,
+  mtry = if (!is.null(trainy) && !is.factor(trainy)) max(floor(ncol(trainx)/3), 1) else
+    floor(sqrt(ncol(trainx))),
+  ntree = 500,
+  predacc = "ALL",
+  ...
+)
 }
 \arguments{
 \item{trainx}{a dataframe or matrix contains columns of predictor variables.}

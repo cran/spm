@@ -4,9 +4,18 @@
 \alias{avi}
 \title{Averaged variable importance based on random forest}
 \usage{
-avi(trainx, trainy, mtry = if (!is.null(trainy) && !is.factor(trainy))
-  max(floor(ncol(trainx)/3), 1) else floor(sqrt(ncol(trainx))), ntree = 500,
-  importance = TRUE, maxk = c(4), nsim = 100, corr.threshold = 0.5, ...)
+avi(
+  trainx,
+  trainy,
+  mtry = if (!is.null(trainy) && !is.factor(trainy)) max(floor(ncol(trainx)/3), 1) else
+    floor(sqrt(ncol(trainx))),
+  ntree = 500,
+  importance = TRUE,
+  maxk = c(4),
+  nsim = 100,
+  corr.threshold = 0.5,
+  ...
+)
 }
 \arguments{
 \item{trainx}{a dataframe or matrix contains columns of predictor variables.}

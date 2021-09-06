@@ -37,7 +37,8 @@
 #' nodes. Note that this is the actual number of observations not the total
 #' weight. By default, 10 is used.
 #' @param cv.fold integer; number of cross-validation folds to perform within
-#' gbm.
+#' gbm. if > 1, then apply n-fold cross validation; the default is 10, i.e.,
+#' 10-fold cross validation that is recommended.
 #' @param weights an optional vector of weights to be used in the fitting
 #' process. Must be positive but do not need to be normalized.
 #' If keep.data = FALSE in the initial call to gbm then it is the user's
@@ -95,7 +96,7 @@ gbmokpred <- function (longlat, trainx, trainy, longlatpredx, predx,
   bag.fraction = 0.5,
   train.fraction = 1.0,
   n.minobsinnode = 10,
-  cv.fold = 10, # becuase of the way used to resample data, we can not do leave-one-out cv.
+  cv.fold = 10, # this is required for `gbm.perf`
   weights = rep(1, nrow(trainx)),   # by default set equal
   keep.data = FALSE,
   verbose = TRUE,

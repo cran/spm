@@ -4,8 +4,7 @@
 \alias{idwcv}
 \title{Cross validation, n-fold for inverse distance weighting (IDW)}
 \usage{
-idwcv(longlat, trainy, cv.fold = 10, nmax = 12, idp = 2,
-  predacc = "VEcv", ...)
+idwcv(longlat, trainy, cv.fold = 10, nmax = 12, idp = 2, predacc = "VEcv", ...)
 }
 \arguments{
 \item{longlat}{a dataframe contains longitude and latitude of point

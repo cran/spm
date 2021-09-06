@@ -4,9 +4,16 @@
 \alias{rfpred}
 \title{Generate spatial predictions using random forest (RF)}
 \usage{
-rfpred(trainx, trainy, longlatpredx, predx, mtry = if (!is.null(trainy) &&
-  !is.factor(trainy)) max(floor(ncol(trainx)/3), 1) else
-  floor(sqrt(ncol(trainx))), ntree = 500, ...)
+rfpred(
+  trainx,
+  trainy,
+  longlatpredx,
+  predx,
+  mtry = if (!is.null(trainy) && !is.factor(trainy)) max(floor(ncol(trainx)/3), 1) else
+    floor(sqrt(ncol(trainx))),
+  ntree = 500,
+  ...
+)
 }
 \arguments{
 \item{trainx}{a dataframe or matrix contains columns of predictor variables.}

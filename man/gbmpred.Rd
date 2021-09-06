@@ -2,14 +2,28 @@
 % Please edit documentation in R/gbmpred.R
 \name{gbmpred}
 \alias{gbmpred}
-\title{Generate spatial predictions using generalized boosted regression modeling (gbm)}
+\title{Generate spatial predictions using generalized boosted regression modeling (`gbm`)}
 \usage{
-gbmpred(trainx, trainy, longlatpredx, predx, var.monotone = rep(0,
-  ncol(trainx)), family = "gaussian", n.trees = 3000,
-  learning.rate = 0.001, interaction.depth = 2, bag.fraction = 0.5,
-  train.fraction = 1, n.minobsinnode = 10, cv.fold = 10,
-  weights = rep(1, nrow(trainx)), keep.data = FALSE, verbose = TRUE,
-  n.cores = 6, ...)
+gbmpred(
+  trainx,
+  trainy,
+  longlatpredx,
+  predx,
+  var.monotone = rep(0, ncol(trainx)),
+  family = "gaussian",
+  n.trees = 3000,
+  learning.rate = 0.001,
+  interaction.depth = 2,
+  bag.fraction = 0.5,
+  train.fraction = 1,
+  n.minobsinnode = 10,
+  cv.fold = 10,
+  weights = rep(1, nrow(trainx)),
+  keep.data = FALSE,
+  verbose = TRUE,
+  n.cores = 6,
+  ...
+)
 }
 \arguments{
 \item{trainx}{a dataframe or matrix contains columns of predictive variables.}
@@ -30,7 +44,7 @@ a vector of 0 is used.}
 
 \item{family}{either a character string specifying the name of the distribution to
 use or a list with a component name specifying the distribution and any
-additional parameters needed. See gbm for details. By default, "gaussian" is
+additional parameters needed. See `gbm` for details. By default, "gaussian" is
 used.}
 
 \item{n.trees}{the total number of trees to fit. This is equivalent to the
@@ -47,8 +61,8 @@ interactions, etc. By default, 2 is used.}
 \item{bag.fraction}{the fraction of the training set observations randomly
 selected to propose the next tree in the expansion. By default, 0.5 is used.}
 
-\item{train.fraction}{The first train.fraction * nrows(data) observations
-are used to fit the gbm and the remainder are used for computing
+\item{train.fraction}{The first `train.fraction * nrows(data)` observations
+are used to fit the `gbm` and the remainder are used for computing
 out-of-sample estimates of the loss function.}
 
 \item{n.minobsinnode}{minimum number of observations in the trees terminal
@@ -56,27 +70,27 @@ nodes. Note that this is the actual number of observations not the total
 weight. By default, 10 is used.}
 
 \item{cv.fold}{integer; number of cross-validation folds to perform within
-gbm. if > 1, then apply n-fold cross validation; the default is 10, i.e.,
+`gbm`. if > 1, then apply n-fold cross validation; the default is 10, i.e.,
 10-fold cross validation that is recommended.}
 
 \item{weights}{an optional vector of weights to be used in the fitting
 process. Must be positive but do not need to be normalized.
-If keep.data = FALSE in the initial call to gbm then it is the user's
-responsibility to resupply the weights to gbm.more. By default, a vector of
+If keep.data = FALSE in the initial call to `gbm` then it is the user's
+responsibility to resupply the weights to `gbm.more`. By default, a vector of
 1 is used.}
 
 \item{keep.data}{a logical variable indicating whether to keep the data and
 an index of the data stored with the object. Keeping the data and index
-makes subsequent calls to gbm.more faster at the cost of storing an extra
+makes subsequent calls to `gbm.more` faster at the cost of storing an extra
 copy of the dataset. By default, 'FALSE' is used.}
 
-\item{verbose}{If TRUE, gbm will print out progress and performance
+\item{verbose}{If TRUE, `gbm` will print out progress and performance
 indicators. By default, 'TRUE' is used.}
 
-\item{n.cores}{The number of CPU cores to use. See gbm for details. By
+\item{n.cores}{The number of CPU cores to use. See `gbm` for details. By
 default, 6 is used.}
 
-\item{...}{other arguments passed on to gbm.}
+\item{...}{other arguments passed on to `gbm`.}
 }
 \value{
 A dataframe of longitude, latitude and predictions.
@@ -86,7 +100,7 @@ This function is to make spatial predictions using generalized
 boosted regression modeling.
 }
 \note{
-This function is largely based on gbm.
+This function is largely based on `gbm`.
 }
 \examples{
 \dontrun{

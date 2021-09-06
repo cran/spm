@@ -6,9 +6,21 @@
 random forest and ordinary kriging and the hybrid method of random forest and
 inverse distance weighting  (RFOKRFIDW)}
 \usage{
-rfokrfidwpred(longlat, trainx, trainy, longlatpredx, predx, mtry = function(p)
-  max(1, floor(sqrt(p))), ntree = 500, idp = 2, nmaxok = 12,
-  nmaxidw = 12, vgm.args = ("Sph"), block = 0, ...)
+rfokrfidwpred(
+  longlat,
+  trainx,
+  trainy,
+  longlatpredx,
+  predx,
+  mtry = function(p) max(1, floor(sqrt(p))),
+  ntree = 500,
+  idp = 2,
+  nmaxok = 12,
+  nmaxidw = 12,
+  vgm.args = ("Sph"),
+  block = 0,
+  ...
+)
 }
 \arguments{
 \item{longlat}{a dataframe contains longitude and latitude of point

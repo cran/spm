@@ -4,10 +4,20 @@
 \alias{rgpred}
 \title{Generate spatial predictions using random forest in ranger (RG)}
 \usage{
-rgpred(trainx, trainy, longlatpredx, predx, mtry = if (!is.null(trainy) &&
-  !is.factor(trainy)) max(floor(ncol(trainx)/3), 1) else
-  floor(sqrt(ncol(trainx))), num.trees = 500, min.node.size = NULL,
-  type = "response", num.threads = NULL, verbose = FALSE, ...)
+rgpred(
+  trainx,
+  trainy,
+  longlatpredx,
+  predx,
+  mtry = if (!is.null(trainy) && !is.factor(trainy)) max(floor(ncol(trainx)/3), 1) else
+    floor(sqrt(ncol(trainx))),
+  num.trees = 500,
+  min.node.size = NULL,
+  type = "response",
+  num.threads = NULL,
+  verbose = FALSE,
+  ...
+)
 }
 \arguments{
 \item{trainx}{a dataframe or matrix contains columns of predictor variables.}

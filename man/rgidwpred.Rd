@@ -5,10 +5,22 @@
 \title{Generate spatial predictions using the hybrid method of random forest
 in ranger and inverse distance weighting (RGIDW)}
 \usage{
-rgidwpred(longlat, trainx, trainy, longlatpredx, predx, mtry = function(p)
-  max(1, floor(sqrt(p))), num.trees = 500, min.node.size = NULL,
-  type = "response", num.threads = NULL, verbose = FALSE, idp = 2,
-  nmax = 12, ...)
+rgidwpred(
+  longlat,
+  trainx,
+  trainy,
+  longlatpredx,
+  predx,
+  mtry = function(p) max(1, floor(sqrt(p))),
+  num.trees = 500,
+  min.node.size = NULL,
+  type = "response",
+  num.threads = NULL,
+  verbose = FALSE,
+  idp = 2,
+  nmax = 12,
+  ...
+)
 }
 \arguments{
 \item{longlat}{a dataframe contains longitude and latitude of point

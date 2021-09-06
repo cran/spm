@@ -103,7 +103,7 @@ gbmokgbmidwpred <- function (longlat, trainx, trainy, longlatpredx, predx,
   bag.fraction = 0.5,
   train.fraction = 1.0,
   n.minobsinnode = 10,
-  cv.fold = 10, # becuase of the way used to resample data, we can not do leave-one-out cv.
+  cv.fold = 0,
   weights = rep(1, nrow(trainx)),   # by default set equal
   keep.data = FALSE,
   verbose = TRUE,

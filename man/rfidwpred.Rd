@@ -5,8 +5,18 @@
 \title{Generate spatial predictions using the hybrid method of random forest and
 inverse distance weighting (RFIDW)}
 \usage{
-rfidwpred(longlat, trainx, trainy, longlatpredx, predx, mtry = function(p)
-  max(1, floor(sqrt(p))), ntree = 500, idp = 2, nmax = 12, ...)
+rfidwpred(
+  longlat,
+  trainx,
+  trainy,
+  longlatpredx,
+  predx,
+  mtry = function(p) max(1, floor(sqrt(p))),
+  ntree = 500,
+  idp = 2,
+  nmax = 12,
+  ...
+)
 }
 \arguments{
 \item{longlat}{a dataframe contains longitude and latitude of point

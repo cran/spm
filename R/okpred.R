@@ -64,6 +64,8 @@ okpred <- function (longlat, trainy, longlat2, nmax = 12, transformation =
   if (transformation == "sqrt") {ok.pred2 = ok.pred1$var1.pred ^ 2}
   if (transformation == "arcsine") {ok.pred2 = (sin(ok.pred1$var1.pred)) ^ 2 * 100}
   if (transformation == "log") {ok.pred2 = exp(ok.pred1$var1.pred)-delta}
-  ok.pred <- cbind(longlat2, ok.pred2, ok.pred1$var1.var)
+  ok.pred1 = ok.pred2
+  var1.var = ok.pred1$var1.var
+  ok.pred <- cbind(longlat2, ok.pred1, var1.var)
   ok.pred
 }

@@ -5,11 +5,24 @@
 \title{Relative variable influence based on generalized boosted regression
 modeling (gbm)}
 \usage{
-rvi(trainx, trainy, var.monotone = rep(0, ncol(trainx)),
-  family = "gaussian", n.trees = 3000, learning.rate = 0.001,
-  interaction.depth = 2, bag.fraction = 0.5, train.fraction = 1,
-  n.minobsinnode = 10, cv.fold = 10, weights = rep(1, nrow(trainx)),
-  keep.data = FALSE, verbose = TRUE, n.cores = 6, ...)
+rvi(
+  trainx,
+  trainy,
+  var.monotone = rep(0, ncol(trainx)),
+  family = "gaussian",
+  n.trees = 3000,
+  learning.rate = 0.001,
+  interaction.depth = 2,
+  bag.fraction = 0.5,
+  train.fraction = 1,
+  n.minobsinnode = 10,
+  cv.fold = 10,
+  weights = rep(1, nrow(trainx)),
+  keep.data = FALSE,
+  verbose = TRUE,
+  n.cores = 6,
+  ...
+)
 }
 \arguments{
 \item{trainx}{a dataframe or matrix contains columns of predictive variables.}
@@ -73,9 +86,8 @@ default, 6 is used.}
 \item{...}{other arguments passed on to gbm.}
 }
 \value{
-A list of column number of importance variable in trainx arranged from the most
-influential to the least influential (impvar), and a dataframe of variables (var), and
-relative influence (rel.inf)
+A dataframe of variables (var), and
+relative influence (rel.inf) arranged from the most influential to the least influential
 }
 \description{
 This function is to to derive a relative variable influence based
@@ -89,8 +101,14 @@ This function is largely based on gbm.
 data(sponge)
 set.seed(1234)
 rvi1 <- rvi(sponge[, -c(3)], sponge[, 3], family = "poisson", n.cores=2)
-names(ri1)
-impvar <- (1:ncol(sponge[, -c(3)]))[ri1$var]
+names(rvi1)
+# The least influence variable
+livar <- as.character(rvi1$gbm.rvi$var[dim(sponge[, -3])[2]])
+livar
+
+# The least influence variable to be removed from the training dataset
+rmvar <- which(names(sponge[, -c(3)]) == livar)
+rmvar
 }
 
 }

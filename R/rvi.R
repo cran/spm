@@ -49,9 +49,8 @@
 #' default, 6 is used.
 #' @param ... other arguments passed on to gbm.
 #'
-#' @return A list of column number of importance variable in trainx arranged from the most
-#' influential to the least influential (impvar), and a dataframe of variables (var), and
-#' relative influence (rel.inf)
+#' @return A dataframe of variables (var), and
+#' relative influence (rel.inf) arranged from the most influential to the least influential
 #'
 #' @note This function is largely based on gbm.
 #'
@@ -65,8 +64,15 @@
 #' data(sponge)
 #' set.seed(1234)
 #' rvi1 <- rvi(sponge[, -c(3)], sponge[, 3], family = "poisson", n.cores=2)
-#' names(ri1)
-#' impvar <- (1:ncol(sponge[, -c(3)]))[ri1$var]
+#' names(rvi1)
+#' # The least influence variable
+#' livar <- as.character(rvi1$gbm.rvi$var[dim(sponge[, -3])[2]])
+#' livar
+#'
+#' # The least influence variable to be removed from the training dataset
+#' rmvar <- which(names(sponge[, -c(3)]) == livar)
+#' rmvar
+
 #' }
 #'
 #' @export
@@ -100,6 +106,5 @@ rvi <- function (trainx, trainy,
   best.iter <- gbm::gbm.perf(gbm1, method = "cv")
   print(best.iter)
   gbm.rvi <- summary(gbm1, n.trees=best.iter, las=2)
-  impvar <- (1:ncol(trainx))[gbm.rvi$var]
-  list(impvar = impvar, gbm.rvi = gbm.rvi)
+  list(gbm.rvi = gbm.rvi)
 }

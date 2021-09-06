@@ -6,10 +6,25 @@
 random forest in ranger (RG) and ordinary kriging and the hybrid method of RG
 and inverse distance weighting (RGOKRGIDW)}
 \usage{
-rgokrgidwpred(longlat, trainx, trainy, longlatpredx, predx, mtry = function(p)
-  max(1, floor(sqrt(p))), num.trees = 500, min.node.size = NULL,
-  type = "response", num.threads = NULL, verbose = FALSE, idp = 2,
-  nmaxok = 12, nmaxidw = 12, vgm.args = ("Sph"), block = 0, ...)
+rgokrgidwpred(
+  longlat,
+  trainx,
+  trainy,
+  longlatpredx,
+  predx,
+  mtry = function(p) max(1, floor(sqrt(p))),
+  num.trees = 500,
+  min.node.size = NULL,
+  type = "response",
+  num.threads = NULL,
+  verbose = FALSE,
+  idp = 2,
+  nmaxok = 12,
+  nmaxidw = 12,
+  vgm.args = ("Sph"),
+  block = 0,
+  ...
+)
 }
 \arguments{
 \item{longlat}{a dataframe contains longitude and latitude of point

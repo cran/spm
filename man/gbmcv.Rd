@@ -4,11 +4,25 @@
 \alias{gbmcv}
 \title{Cross validation, n-fold for generalized boosted regression modeling (gbm)}
 \usage{
-gbmcv(trainx, trainy, var.monotone = rep(0, ncol(trainx)),
-  family = "gaussian", n.trees = 3000, learning.rate = 0.001,
-  interaction.depth = 2, bag.fraction = 0.5, train.fraction = 1,
-  n.minobsinnode = 10, cv.fold = 10, weights = rep(1, nrow(trainx)),
-  keep.data = FALSE, verbose = TRUE, n.cores = 6, predacc = "VEcv", ...)
+gbmcv(
+  trainx,
+  trainy,
+  var.monotone = rep(0, ncol(trainx)),
+  family = "gaussian",
+  n.trees = 3000,
+  learning.rate = 0.001,
+  interaction.depth = 2,
+  bag.fraction = 0.5,
+  train.fraction = 1,
+  n.minobsinnode = 10,
+  cv.fold = 10,
+  weights = rep(1, nrow(trainx)),
+  keep.data = FALSE,
+  verbose = TRUE,
+  n.cores = 6,
+  predacc = "VEcv",
+  ...
+)
 }
 \arguments{
 \item{trainx}{a dataframe or matrix contains columns of predictive variables.}

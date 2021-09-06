@@ -5,9 +5,18 @@
 \title{Cross validation, n-fold for the hybrid method of random forest and
 inverse distance weighting (RFIDW)}
 \usage{
-rfidwcv(longlat, trainx, trainy, cv.fold = 10, mtry = function(p) max(1,
-  floor(sqrt(p))), ntree = 500, idp = 2, nmax = 12, predacc = "VEcv",
-  ...)
+rfidwcv(
+  longlat,
+  trainx,
+  trainy,
+  cv.fold = 10,
+  mtry = function(p) max(1, floor(sqrt(p))),
+  ntree = 500,
+  idp = 2,
+  nmax = 12,
+  predacc = "VEcv",
+  ...
+)
 }
 \arguments{
 \item{longlat}{a dataframe contains longitude and latitude of point

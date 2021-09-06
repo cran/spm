@@ -5,10 +5,23 @@
 \title{Generate spatial predictions using the hybrid method of random forest in
 ranger and ordinary kriging (RGOK)}
 \usage{
-rgokpred(longlat, trainx, trainy, longlatpredx, predx, mtry = function(p)
-  max(1, floor(sqrt(p))), num.trees = 500, min.node.size = NULL,
-  type = "response", num.threads = NULL, verbose = FALSE, nmax = 12,
-  vgm.args = ("Sph"), block = 0, ...)
+rgokpred(
+  longlat,
+  trainx,
+  trainy,
+  longlatpredx,
+  predx,
+  mtry = function(p) max(1, floor(sqrt(p))),
+  num.trees = 500,
+  min.node.size = NULL,
+  type = "response",
+  num.threads = NULL,
+  verbose = FALSE,
+  nmax = 12,
+  vgm.args = ("Sph"),
+  block = 0,
+  ...
+)
 }
 \arguments{
 \item{longlat}{a dataframe contains longitude and latitude of point
