@@ -1,8 +1,8 @@
-b6e20775b825df4f0e392d5ac4282ca5 *DESCRIPTION
+e3aef7d01a1868d048dc2893af0fe2ca *DESCRIPTION
 e414fe14f484bb2ca6c7a3cb6c579320 *NAMESPACE
 2eead286b566a5fa97afd76b05a583d0 *R/RFcv.R
 50134bf7f6c0e2c7bd6671559873e5bd *R/avi.R
-624f89c52d38d435e66a8af0255bc933 *R/gbmcv.R
+3d84916ce3366e7d53e611f920b435c1 *R/gbmcv.R
 ce743a332af2e20cb4aecc389bd70b1f *R/gbmidwcv.R
 227230f1f5b36a9ccd406016201668e2 *R/gbmidwpred.R
 a7b5f3240aac6f6f83edcfb30ec50bdc *R/gbmokcv.R
@@ -43,7 +43,7 @@ a1d9739b394e5d038d038d2c9f2328a4 *data/sponge.rda
 22494cafef41f2b71f6a4022a2907630 *data/swmud.rda
 7404e9f20f708801921a145a05676769 *inst/doc/spm.R
 48f514a77ff884f5f9de4c70adcdebf9 *inst/doc/spm.Rmd
-8de31435d58dbba1a6341ff2d7d58479 *inst/doc/spm.html
+18ce177bcc68dc04dc44efa10a9d73dc *inst/doc/spm.html
 8f01db529bb4b4efdb81546d7c1ecb78 *man/RFcv.Rd
 b85880df117167191ad1ec4e3aa64bee *man/avi.Rd
 bc891d8a8dda46f123ee4845eea70a81 *man/cran-comments.Rd

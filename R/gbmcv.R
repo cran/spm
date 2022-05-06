@@ -114,7 +114,11 @@ gbmcv <- function (trainx, trainy, var.monotone = rep(0, ncol(trainx)),
   n <- nrow(trainx)
   if (classRF) {
   stop ("This function is not for categorical response variable")
-  }     else {
+  }
+
+  if (dim(table(trainy)) <= 4) {
+    f <- trainy
+  } else {
   f <- cut(trainy, c(-Inf, stats::quantile(trainy, 1:4/5), Inf))
   }
   nlvl <- table(f)

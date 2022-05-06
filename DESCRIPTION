@@ -1,7 +1,7 @@
 Package: spm
 Title: Spatial Predictive Modeling
-Version: 1.2.1
-Date: 2021-09-01
+Version: 1.2.2
+Date: 2022-05-06
 Authors@R: person("Jin", "Li", email = "jinli68@gmail.com", role = c("aut", "cre"))
 Description: Introduction to some novel accurate hybrid methods of geostatistical and machine learning methods for spatial predictive modelling. It contains two commonly used geostatistical methods, two machine learning methods, four hybrid methods and two averaging methods. For each method, two functions are provided. One function is for assessing the predictive errors and accuracy of the method based on cross-validation. The other one is for generating spatial predictions using the method. For details please see: Li, J., Potter, A., Huang, Z., Daniell, J. J. and Heap, A. (2010) <https:www.ga.gov.au/metadata-gateway/metadata/record/gcat_71407>
   Li, J., Heap, A. D., Potter, A., Huang, Z. and Daniell, J. (2011) <doi:10.1016/j.csr.2011.05.015>
@@ -15,8 +15,8 @@ RoxygenNote: 7.1.1
 Suggests: knitr, rmarkdown
 VignetteBuilder: knitr
 NeedsCompilation: no
-Packaged: 2021-09-01 22:00:17 UTC; Jin
+Packaged: 2022-05-06 01:57:26 UTC; Jin
 Author: Jin Li [aut, cre]
 Maintainer: Jin Li <jinli68@gmail.com>
 Repository: CRAN
-Date/Publication: 2021-09-06 09:20:05 UTC
+Date/Publication: 2022-05-06 06:50:02 UTC
